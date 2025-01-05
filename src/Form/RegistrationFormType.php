@@ -69,6 +69,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'S\'inscrire',
+                'attr' => [
+                    'class' => "w-full px-5 py-3 mb-4 text-base text-white transition duration-300 ease-in-out border rounded-md cursor-pointer border-primary bg-primary hover:bg-blue-dark",
+                    ]
+            ])
         ;
     }
 

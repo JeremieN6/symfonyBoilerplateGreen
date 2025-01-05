@@ -4,35 +4,38 @@
 {% endblock %}
 
 {% block body %}
+  <!-- ====== Forms Section Start -->
 
+  <!-- ====== Forms Section End -->
 	<!-- Section start -->
-		<div class="sign-in section panel overflow-hidden bg-secondary dark:bg-gray-900" id="sign-in"> <div class="section-outer panel">
+	<div class="sign-in section panel overflow-hidden bg-secondary dark:bg-gray-900" id="sign-in">
+		<div class="section-outer panel">
 			<div class="section-inner panel">
 				<div class="panel overflow-hidden">
 					<div class="panel row child-cols-12 md:child-cols-6 g-0">
 						<div>
 							<div class="panel overflow-hidden min-h-300px h-100 lg:h-screen" data-anime="translateX: [-24, 0]; opacity: [0, 1]; easing: easeInOutExpo; duration: 750;">
-									<figure class="panel h-100 m-0 rounded">
-										<canvas class="h-100 w-100"></canvas>
-										<img alt="Hero login image" class="media-cover image" src="{{ asset('./images/login-main-1.webp') }}"/>
-									</figure>
-									<div class="position-cover text-white vstack justify-end p-4 lg:p-6 xl:py-8">
-										<div class="position-cover bg-gradient-to-t from-black to-transparent opacity-50"></div>
-										<div class="panel z-1">
-											<div class="vstack gap-3" data-anime="targets: &gt;*; translateY: [-24, 0]; opacity: [0, 1]; easing: easeInOutExpo; duration: 750; delay: anime.stagger(100, {start: 250});">
-												<p class="fs-5 xl:fs-4 fw-medium">“Cette applicaiton simplifie la gestion des grandes quantité de données, propose un audit et permet de faire des export en plusieurs format... C'est génial !”
-												</p>
-												<div class="vstack gap-0">
-													<p class="fs-6 lg:fs-5 fw-medium">Amour As-Amama</p>
-													<span class="fs-7 opacity-80">CEO &amp; Formateur</span>
-												</div>
+								<figure class="panel h-100 m-0 rounded">
+									<canvas class="h-100 w-100"></canvas>
+									<img alt="Hero login image" class="media-cover image" src="{{ asset('./images/login-main-1.webp') }}"/>
+								</figure>
+								<div class="position-cover text-white vstack justify-end p-4 lg:p-6 xl:py-8">
+									<div class="position-cover bg-gradient-to-t from-black to-transparent opacity-50"></div>
+									<div class="panel z-1">
+										<div class="vstack gap-3" data-anime="targets: &gt;*; translateY: [-24, 0]; opacity: [0, 1]; easing: easeInOutExpo; duration: 750; delay: anime.stagger(100, {start: 250});">
+											<p class="fs-5 xl:fs-4 fw-medium">“Cette applicaiton simplifie la gestion des grandes quantité de données, propose un audit et permet de faire des export en plusieurs format... C'est génial !”
+											</p>
+											<div class="vstack gap-0">
+												<p class="fs-6 lg:fs-5 fw-medium">Amour As-Amama</p>
+												<span class="fs-7 opacity-80">CEO &amp; Formateur</span>
 											</div>
 										</div>
 									</div>
-									<a class="position-absolute top-0 ltr:start-0 rtl:end-0 text-none m-4 lg:m-6" data-anime="scale: [0.5, 1]; opacity: [0, 1]; easing: easeInOutExpo; duration: 750; delay: anime.stagger(100, {start: 150});" href="{{ path('app_main')}}">
-										<img alt="" class="w-32px lg:w-40px" src="{{ asset('./images/logo-mark.png') }}"/>
-									</a>
 								</div>
+								<a class="position-absolute top-0 ltr:start-0 rtl:end-0 text-none m-4 lg:m-6" data-anime="scale: [0.5, 1]; opacity: [0, 1]; easing: easeInOutExpo; duration: 750; delay: anime.stagger(100, {start: 150});" href="{{ path('app_main')}}">
+									<img alt="" class="w-32px lg:w-40px" src="{{ asset('./images/logo-mark.png') }}"/>
+								</a>
+							</div>
 						</div>
 						<div>
 							<div class="panel vstack justify-center h-100 overflow-hidden">
@@ -75,22 +78,22 @@
 											<hr class="m-0"/>
 											<span class="position-absolute top-50 start-50 translate-middle p-1 fs-7 text-uppercase bg-secondary dark:bg-gray-900">Ou</span>
 										</div>
-										<form class="vstack gap-2">
 											{{ form_errors(registrationForm) }}
 
 											{{ form_start(registrationForm) }}
 											{{ form_row(registrationForm.email) }}
 											{{ form_row(registrationForm.pseudo) }}
 											{{ form_row(registrationForm.plainPassword) }}
-                      <div class="hstack text-start">
-											  {{ form_row(registrationForm.agreeTerms) }}
-                        <label class="agreeTermsLabel">
-                            J'ai lu et j'accepte les <a href="{{ path('app_terms') }}" class="uc-link text-primary">conditions d'utilisation</a>.
-                        </label>
-                      </div>
+											<div class="hstack text-start">
+												{{ form_row(registrationForm.agreeTerms) }}
+												<label class="agreeTermsLabel">
+													J'ai lu et j'accepte les
+													<a href="{{ path('app_terms') }}" class="uc-link text-primary">conditions d'utilisation</a>.
+												</label>
+											</div>
 											<button class="btn btn-primary btn-md text-white" type="submit">S'inscrire</button>
 											{{ form_end(registrationForm) }}
-										</form>
+
 										<p>Vous avez déjà un compte ?
 											<a class="uc-link" href="{{path('app_login')}}">Connexion</a>
 										</p>
