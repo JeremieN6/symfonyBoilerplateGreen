@@ -1,0 +1,163 @@
+        <!-- Section start -->
+        <div class="hero-header section panel overflow-hidden" id="hero_header">
+            <div class="position-absolute top-0 start-0 end-0 min-h-screen overflow-hidden d-none lg:d-block"
+                data-anime="targets: &gt;*; scale: [0, 1]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 750});">
+                <div class="position-absolute top-0 start-0 rotate-45"
+                    style="top: 30% !important; left: 18% !important">
+                    <img alt="star-1" class="w-32px text-gray-900 dark:text-white" data-uc-svg=""
+                        src="{{ asset('./images/star-1.svg') }}" />
+                </div>
+                <div class="position-absolute top-0 end-0 rotate-45" style="top: 15% !important; right: 18% !important">
+                    <img alt="star-2" class="w-24px text-gray-900 dark:text-white" data-uc-svg=""
+                        src="{{ asset('./images/star-2.svg') }}" />
+                </div>
+            </div>
+            <div class="section-outer panel pt-9 lg:pt-10 pb-6 sm:pb-8 lg:pb-9">
+                <div class="container max-w-xl">
+                    <div class="section-inner panel mt-2 sm:mt-4 lg:mt-0"
+                        data-anime="targets: &gt;*; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                        <div class="vstack items-center gap-4 mb-4 sm:mb-6 lg:mb-8 max-w-850px mx-auto text-center">
+                            <h1 class="h2 sm:h1 lg:display-6 xl:display-5 m-0">Convertisseur CSV et XLSX en Graphique
+                            </h1>
+                            <p class="fs-6 md:fs-5 text-dark dark:text-white text-opacity-70">
+                                Ce projet est né d’un constat simple : analyser des données rapidement et efficacement
+                                reste un défi pour de nombreuses entreprises et individus.
+                                Trop souvent, les outils d’analyse sont complexes, chronophages, ou inaccessibles pour
+                                les non-initiés.
+                                J'ai voulu créer une solution accessible à tous, capable de transformer des fichiers
+                                Excel ou CSV en rapports stylisés et exploitables en un seul clic.
+                                Guidés par une volonté de simplifier l’analyse des données tout en offrant des
+                                recommandations utiles, j'ai développé cet outil avec une vision claire :
+                                démocratiser l'accès à des insights précieux pour une prise de décision éclairée.
+                            </p>
+                        </div>
+                        <div class="container max-w-lg">
+                            <div class="section-inner panel">
+                                <div class="panel vstack gap-4 sm:gap-6 xl:gap-8">
+                                    <h2 class="h4 sm:h3 lg:h2 m-0 text-center"
+                                        data-anime="onview: -100; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 100;">
+                                        Les valeurs sont simples !</h2>
+                                    <div class="d-flex flex-column">
+                                        <div class="chart-options">
+                                            <div class="d-flex justify-center file-upload">
+                                                <label for="file-input">Importez votre fichier CSV ou XLSX :</label>
+                                                <input type="file" id="file-input" accept=".csv, .xlsx">
+                                            </div>
+
+                                            <div class="containerChartOptions containerGraphType">
+                                                <div class="contentGraphType">
+                                                    <label for="chart-type">Type de graphique :</label>
+                                                    <select id="chart-type"
+                                                        class="form-select form-control-lg rounded dark:bg-gray-100 dark:bg-opacity-5 dark:text-white dark:border-gray-800">
+                                                        <option value="bar">Diagramme en bâtons</option>
+                                                        <option value="line">Graphique en ligne</option>
+                                                        <option value="pie">Diagramme circulaire</option>
+                                                    </select>
+                                                </div>
+                                                <div class="contentGraphColor">
+                                                    <label for="chart-color" class="chartColorLabel">Couleur principale
+                                                        :</label>
+                                                    <input type="color" id="chart-color" value="#12715B"
+                                                        class="colorPicker" />
+                                                </div>
+                                            </div>
+
+                                            <!-- Section Sélection des Colonnes -->
+                                            <div class="containerChartOptions containerColumns">
+                                                <div class="contentColumnX">
+                                                    <label for="x-column">Colonne X :</label>
+                                                    <select id="x-column"
+                                                        class="form-select form-control-md rounded dark:bg-gray-100 dark:bg-opacity-5 dark:text-white dark:border-gray-800"></select>
+                                                </div>
+
+                                                <div class="contentColumnY">
+                                                    <label for="y-column">Colonne Y :</label>
+                                                    <select id="y-column"
+                                                        class="form-select form-control-md rounded dark:bg-gray-100 dark:bg-opacity-5 dark:text-white dark:border-gray-800"></select>
+                                                </div>
+                                            </div>
+
+                                            <div class="containerChartOptions containerGraphTitle">
+                                                <div class="contentGraphTitle">
+                                                    <label for="chart-title">Titre du graphique :</label>
+                                                    <input
+                                                        class="form-control h-48px w-full bg-white dark:border-white dark:bg-opacity-10 dark:border-opacity-0 dark:text-white"
+                                                        id="chart-title"
+                                                        placeholder="Saisissez un titre pour votre graphique"
+                                                        type="text" />
+                                                </div>
+                                                <div class="container--btnTitle">
+                                                    <button id="update-title"
+                                                        class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">Mettre
+                                                        à jour le titre</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Zone d'affichage du graphique -->
+                                        <canvas id="chart"></canvas>
+                                        <div class="containerButtonAction export-options">
+                                            <div class="containerButtons">
+                                            <!-- Section Export -->
+                                            <button id="export-png"
+                                                class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">📸
+                                                Export PNG</button>
+                                            <button id="export-pdf"
+                                                class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">📁
+                                                Export PDF</button>
+                                            </div>
+                                        </div>
+                                        <div class="containerButtonIA">
+                                            <label for="analysisObjective" class="analysisObjective">Choisissez l'objectif de l'analyse :</label>
+                                            <select id="analysisObjective" class="form-select form-control-md rounded mb-5 dark:bg-gray-100 dark:bg-opacity-5 dark:text-white dark:border-gray-800">
+                                                <option value="general">Analyse Générale</option>
+                                                <option value="sales">Optimisation des ventes</option>
+                                                <option value="production">Amélioration de la production</option>
+                                                <option value="finance">Analyse financière</option>
+                                                <option value="trends">Étude des tendances</option>
+                                            </select>
+                                        <!-- Gnérérer un rapport -->
+                                        <button id="generateAIReport"
+                                            class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">🤖
+                                            Générer Rapport IA</button>
+                                        <div id="reportOutput"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="panel row child-cols-12 col-match g-1 sm:g-2">
+                            <div class="col-4">
+                                <figure
+                                    class="featured-image m-0 rounded ratio ratio-2x3 sm:rounded-2 uc-transition-toggle overflow-hidden">
+                                    <img alt="About image"
+                                        class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                        src="./public/assets/images/hero-about-01.jpg" />
+                                </figure>
+                                <div class="position-absolute top-0 start-0 z-1 ms-n8 mt-n8 d-none lg:d-block">
+                                    <img alt="hand-pencil" class="w-200px xl:w-250px d-block dark:d-none"
+                                        src="./public/assets/images/hand-pencil.svg" />
+                                    <img alt="hand-pencil-dark" class="w-200px xl:w-250px d-none dark:d-block"
+                                        src="./public/assets/images/hand-pencil-dark.svg" />
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="h-100">
+                                    <figure class="panel h-100 m-0 rounded sm:rounded-2 overflow-hidden">
+                                        <canvas class="h-100 w-100"></canvas>
+                                        <img alt="About image" class="media-cover image"
+                                            src="./public/assets/images/hero-about-02.jpg" />
+                                    </figure>
+                                </div>
+                                <div class="position-absolute bottom-0 end-0 z-1 me-n8 mb-n8 d-none lg:d-block">
+                                    <img alt="empathing" class="w-200px xl:w-250px d-block dark:d-none"
+                                        src="./public/assets/images/empathing.svg" />
+                                    <img alt="empathing-dark" class="w-200px xl:w-250px d-none dark:d-block"
+                                        src="./public/assets/images/empathing-dark.svg" />
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section end -->

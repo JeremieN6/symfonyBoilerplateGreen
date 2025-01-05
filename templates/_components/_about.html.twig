@@ -1,0 +1,583 @@
+<!-- Wrapper start -->
+<div class="wrap" id="wrapper">
+        <!-- Section start -->
+        <div class="hero-header section panel overflow-hidden" id="hero_header">
+            <div class="position-absolute top-0 start-0 end-0 min-h-screen overflow-hidden d-none lg:d-block"
+                data-anime="targets: &gt;*; scale: [0, 1]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 750});">
+                <div class="position-absolute top-0 start-0 rotate-45"
+                    style="top: 20% !important; left: 18% !important">
+                    <img alt="star-1" class="w-24px text-gray-900 dark:text-white" data-uc-svg=""
+                        src="{{asset('./images/star-1.svg')}}" />
+                </div>
+                <div class="position-absolute top-0 end-0 rotate-45" style="top: 15% !important; right: 18% !important">
+                    <img alt="star-2" class="w-32px text-gray-900 dark:text-white" data-uc-svg=""
+                        src="{{asset('./images/star-2.svg')}}" />
+                </div>
+            </div>
+            <div class="section-outer panel pt-9 lg:pt-10 pb-6 sm:pb-8 lg:pb-9">
+                <div class="container max-w-xl">
+                    <div class="section-inner panel mt-2 sm:mt-4 lg:mt-0"
+                        data-anime="targets: &gt;*; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                        <div class="vstack items-center gap-4 mb-4 sm:mb-6 lg:mb-8 max-w-850px mx-auto text-center">
+                            <h1 class="h2 sm:h1 lg:display-6 xl:display-5 m-0">A propos de DataGraph.</h1>
+                            <p class="fs-6 md:fs-5 text-dark dark:text-white text-opacity-70">
+                                Ce projet est né d’un constat simple : analyser des données rapidement et efficacement reste un défi pour de nombreuses entreprises et individus. 
+                                Trop souvent, les outils d’analyse sont complexes, chronophages, ou inaccessibles pour les non-initiés. 
+                                J'ai voulu créer une solution accessible à tous, capable de transformer des fichiers Excel ou CSV en rapports stylisés et exploitables en un seul clic. 
+                                Guidés par une volonté de simplifier l’analyse des données tout en offrant des recommandations utiles, j'ai développé cet outil avec une vision claire : 
+                                démocratiser l'accès à des insights précieux pour une prise de décision éclairée.
+                            </p>
+                        </div>
+                        <div class="panel row child-cols-12 col-match g-1 sm:g-2">
+                            <div class="col-4">
+                                <figure
+                                    class="featured-image m-0 rounded ratio ratio-2x3 sm:rounded-2 uc-transition-toggle overflow-hidden">
+                                    <img alt="About image"
+                                        class="media-cover image uc-transition-scale-up uc-transition-opaque"
+                                        src="{{asset('./images/hero-about-01.jpg')}}" />
+                                </figure>
+                                <div class="position-absolute top-0 start-0 z-1 ms-n8 mt-n8 d-none lg:d-block">
+                                    <img alt="hand-pencil" class="w-200px xl:w-250px d-block dark:d-none"
+                                        src="{{asset('./images/hand-pencil.svg')}}" />
+                                    <img alt="hand-pencil-dark" class="w-200px xl:w-250px d-none dark:d-block"
+                                        src="{{asset('./images/hand-pencil-dark.svg')}}" />
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="h-100">
+                                    <figure class="panel h-100 m-0 rounded sm:rounded-2 overflow-hidden">
+                                        <canvas class="h-100 w-100"></canvas>
+                                        <img alt="About image" class="media-cover image"
+                                            src="{{asset('./images/hero-about-02.jpg')}}" />
+                                    </figure>
+                                </div>
+                                <div class="position-absolute bottom-0 end-0 z-1 me-n8 mb-n8 d-none lg:d-block">
+                                    <img alt="empathing" class="w-200px xl:w-250px d-block dark:d-none"
+                                        src="{{asset('./images/empathing.svg')}}" />
+                                    <img alt="empathing-dark" class="w-200px xl:w-250px d-none dark:d-block"
+                                        src="{{asset('./images/empathing-dark.svg')}}" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section end -->
+        <!-- Section start -->
+        <div class="clients-brands section panel overflow-hidden" id="clients_brands">
+            <div class="section-outer panel pb-6 xl:pb-9">
+                <div class="container max-w-xl">
+                    <div class="section-inner panel">
+                        <div class="block-panel panel"
+                            data-anime="onview: -100; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 250;">
+                            <div class="element-brands max-w-950px m-auto text-gray-900 dark:text-white">
+                                <div class="swiper" data-uc-swiper="items: 2; center: true; center-bounds: true;"
+                                    data-uc-swiper-m="items: 5; gap: 80;"
+                                    data-uc-swiper-s="items: 4; center: false; center-bounds: false;">
+                                    <div class="swiper-wrapper items-center ease-linear">
+                                        <div class="brand-item swiper-slide text-center">
+                                            <img alt="Proline" class="brand-item-image h-40px" data-uc-svg=""
+                                                src="{{asset('./images/brand-01.svg')}}" />
+                                        </div>
+                                        <div class="brand-item swiper-slide text-center">
+                                            <img alt="Iceberg" class="brand-item-image h-40px" data-uc-svg=""
+                                                src="{{asset('./images/brand-02.svg')}}" />
+                                        </div>
+                                        <div class="brand-item swiper-slide text-center">
+                                            <img alt="PinPoint" class="brand-item-image h-40px" data-uc-svg=""
+                                                src="{{asset('./images/brand-03.svg')}}" />
+                                        </div>
+                                        <div class="brand-item swiper-slide text-center">
+                                            <img alt="Clues" class="brand-item-image h-40px" data-uc-svg=""
+                                                src="{{asset('./images/brand-04.svg')}}" />
+                                        </div>
+                                        <div class="brand-item swiper-slide text-center">
+                                            <img alt="Snowflake" class="brand-item-image h-40px" data-uc-svg=""
+                                                src="{{asset('./images/brand-05.svg')}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section end -->
+        <!-- Section start -->
+        <div class="about-us section panel overflow-hidden"
+            data-anime="onview: -100; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 250;"
+            id="about_us">
+            <div class="section-outer panel py-6 xl:py-9 bg-secondary dark:bg-gray-800">
+                <div class="d-none lg:d-block"
+                    data-anime="onview: -100; targets: img; scale: [0.8, 1]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 350;">
+                    <div class="position-absolute bottom-0 start-0 ms-n8 mb-6">
+                        <img alt="walking" class="w-150px xl:w-250px d-block dark:d-none" src="{{asset('./images/walking.svg')}}" />
+                        <img alt="walking-dark" class="w-150px xl:w-250px d-none dark:d-block"
+                            src="{{asset('./images/walking-dark.svg')}}" />
+                    </div>
+                </div>
+                <div class="container max-w-lg">
+                    <div class="section-inner panel">
+                        <div class="panel vstack text-center"
+                            data-anime="onview: -100; targets: &gt;*; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                            <h2 class="h3 lg:h2 mb-4">Comment DataGraph aide</h2>
+                            <p class="fs-5 xl:fs-4 text-dark dark:text-white text-opacity-70">
+                                Datagraph est conçu pour vous faire gagner du temps et de l’énergie dans l’analyse de vos données. 
+                                En quelques clics, transformez vos fichiers Excel ou CSV en graphiques clairs, stylisés et exploitables. 
+                                Plus besoin de compétences avancées ou d’outils complexes : notre solution rend l’interprétation accessible à tous,
+                                 qu’il s’agisse d’identifier des tendances, de comparer des chiffres ou de prendre des décisions stratégiques. 
+                                Avec Datagraph, vous passez moins de temps à manipuler vos données et plus de temps à les utiliser pour faire avancer vos projets.
+                            </p>
+                            <p class="fs-5 xl:fs-4 text-dark dark:text-white text-opacity-70">
+                                Datagraph s’adapte à tous vos objectifs, que ce soit pour générer des rapports professionnels, partager des insights avec vos équipes ou explorer vos chiffres sous un nouvel angle. 
+                                Grâce à ses options personnalisables, il permet d’orienter les analyses selon vos priorités : performances commerciales, gestion de projet ou suivi de production, entre autres. 
+                                Les rapports stylisés et partageables de Datagraph donnent un coup de pouce visuel et professionnel à vos présentations, vous aidant à communiquer des informations clés de manière impactante.
+                            </p>
+                            <div class="panel mt-6">
+                                <div class="row child-cols-6 lg:child-cols-4 justify-center g-3 col-match">
+                                    <div>
+                                        <div class="panel vstack gap-1">
+                                            <h4 class="h2 xl:h1 m-0"><span
+                                                    data-anime="onview: -100; textContent: 2024; round: 1; easing: linear; duration: 1200;">0</span>
+                                            </h4>
+                                            <p class="fs-6 lg:fs-5 text-dark dark:text-white text-opacity-70">Date de lancement.</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="panel vstack gap-1">
+                                            <h4 class="h2 xl:h1 m-0"><span
+                                                    data-anime="onview: -100; textContent: [0, 78]; round: 1; easing: linear; duration: 1200;">0</span>
+                                            </h4>
+                                            <p class="fs-6 lg:fs-5 text-dark dark:text-white text-opacity-70">
+                                                Anlayses rédigées par Intelligence Artificielle (environ 😜).</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="panel vstack gap-1">
+                                            <h4 class="h2 xl:h1 m-0"><span
+                                                    data-anime="onview: -100; textContent: [0, 91]; round: 1; easing: linear; duration: 1200;">0</span>k
+                                            </h4>
+                                            <p
+                                                class="fs-6 lg:fs-5 text-dark dark:text-white text-opacity-70 text-nowrap">
+                                                Documents uploadés (environ 😜).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section end -->
+        <!-- Section start -->
+        <div class="about-values section panel overflow-hidden" id="about_values">
+            <div class="section-outer panel py-6 xl:py-9">
+                <div class="container max-w-lg">
+                    <div class="section-inner panel">
+                        <div class="panel vstack gap-4 sm:gap-6 xl:gap-8">
+                            <h2 class="h4 sm:h3 lg:h2 m-0 text-center"
+                                data-anime="onview: -100; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 100;">
+                               Les valeurs sont simples !</h2>
+                            <div class="row child-cols-12 sm:child-cols-6 g-2 lg:g-4 justify-between"
+                                data-anime="onview: -100; targets: &gt; *; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                                <div>
+                                    <div class="panel vstack gap-2 p-4 lg:py-6 rounded-2 bg-secondary dark:bg-gray-800">
+                                        <img alt="impact-icon" class="w-64px lg:w-80px d-block dark:d-none"
+                                            src="{{asset('./images/icon-diamond.svg')}}" />
+                                        <img alt="impact-icon" class="w-64px lg:w-80px d-none dark:d-block"
+                                            src="{{asset('./images/icon-diamond-dark.svg')}}" />
+                                        <h5 class="h5 lg:h4 m-0">Avoir de l'impact</h5>
+                                        <p class="fs-6 opacity-70 dark:opacity-80">Nous construisons quelque chose de grand.
+                                            Quelque chose qui a le pouvoir de changer la trajectoire d'une entreprise de toute taille
+                                            pour le meilleur. Même en étant débutant, ce n'est pas un problème, il faut prendre les choses une à une et corriger au besoin. <br>
+                                            C'est d'ailleurs une de nos valeurs...</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="panel vstack gap-2 p-4 lg:py-6 rounded-2 bg-secondary dark:bg-gray-800">
+                                        <img alt="crown-icon" class="w-64px lg:w-80px d-block dark:d-none"
+                                            src="{{asset('./images/icon-trophy.svg')}}" />
+                                        <img alt="crown-icon" class="w-64px lg:w-80px d-none dark:d-block"
+                                            src="{{asset('./images/icon-trophy-dark.svg')}}" />
+                                        <h5 class="h5 lg:h4 m-0">Apprendre</h5>
+                                        <p class="fs-6 opacity-70 dark:opacity-80">DataGraph est un de mes nombreux projets.
+                                            L'objectif est de fournir des outils adaptés aux besoins du clients, lui permettant de résoudre un prblème fort et de 
+                                            fondamentalement changé son quotidien, pour le meilleur bien sûr.
+                                            Toujours prendre le temps d'élargir mes connaissances, à partir d'actions concrètes.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="panel vstack gap-2 p-4 lg:py-6 rounded-2 bg-secondary dark:bg-gray-800">
+                                        <img alt="fun-icon" class="w-64px lg:w-80px d-block dark:d-none"
+                                            src="{{asset('./images/icon-globe.svg')}}" />
+                                        <img alt="fun-icon" class="w-64px lg:w-80px d-none dark:d-block"
+                                            src="{{asset('./images/icon-globe-dark.svg')}}" />
+                                        <h5 class="h5 lg:h4 m-0">S'amuser</h5>
+                                        <p class="fs-6 opacity-70 dark:opacity-80">Work hard play harder. C'est ma devise. C'est en faisant ce genre d'outil que je m'amuse le plus.
+                                           Je crois en l'importance de célébrer les victoires, grandes ou petites, des entreprises ou des individus.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="panel vstack gap-2 p-4 lg:py-6 rounded-2 bg-secondary dark:bg-gray-800">
+                                        <img alt="empathy-icon" class="w-64px lg:w-80px d-block dark:d-none"
+                                            src="{{asset('./images/icon-crown.svg')}}" />
+                                        <img alt="empathy-icon" class="w-64px lg:w-80px d-none dark:d-block"
+                                            src="{{asset('./images/icon-crown-dark.svg')}}" />
+                                        <h5 class="h5 lg:h4 m-0">Empathie </h5>
+                                        <p class="fs-6 opacity-70 dark:opacity-80">Faire preuve d'empathie à l'égard de chaque client est important.
+                                            Je pense que c'est une bonne manière que de se mettre à la place du client pour offrir la meilleure expérience.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section end -->
+        <!-- Section start -->
+        <div class="clients-feedbacks section panel overflow-hidden" id="clients_feedbacks">
+            <div class="section-outer panel pb-6 xl:pb-9">
+                <div class="container max-w-lg">
+                    <div class="section-inner panel">
+                        <div class="panel vstack justify-center items-center gap-4 sm:gap-6 xl:gap-8"
+                            data-anime="onview: -100; targets: &gt; *; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                            <h2 class="h4 sm:h3 lg:h2 m-0 text-center">Quelques avis clients</h2>
+                            <div class="row child-cols-12 sm:child-cols-6 xl:child-cols-4 justify-center col-match g-2 lg:g-3"
+                                data-uc-grid="">
+                                <div>
+                                    <div class="px-3 sm:px-4 py-4 panel vstack justify-between gap-3 rounded-2 border">
+                                        <div class="panel vstack items-start gap-2">
+                                            <div class="panel">
+                                                <div class="hstack h-48px">
+                                                    <img alt="Brand" class="w-128px text-gray-900 dark:text-white"
+                                                        data-uc-svg="" src="{{asset('./images/brand-07.svg')}}" />
+                                                </div>
+                                            </div>
+                                            <p class="fs-6 lg:fs-5 text-dark dark:text-white text-opacity-70">“
+                                                Datagraph m’a fait gagner un temps précieux ! En quelques clics, 
+                                                j’obtiens des graphiques clairs et des rapports adaptés à mes présentations. 
+                                                C’est l’outil indispensable pour toute analyse rapide et visuelle.”</p>
+                                        </div>
+                                        <div class="panel hstack gap-2 mt-2 lg:mt-4">
+                                            <img alt="Julien R." class="w-40px rounded-circle" src="{{asset('./images/01.png')}}" />
+                                            <div class="panel vstack items-start gap-0">
+                                                <h6 class="h6 m-0">Julien R.</h6>
+                                                <span class="fs-7 opacity-70">Responsable Marketing.</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="px-3 sm:px-4 py-4 panel vstack justify-between gap-3 rounded-2 border">
+                                        <div class="panel vstack items-start gap-2">
+                                            <div class="panel">
+                                                <div class="hstack h-48px">
+                                                    <img alt="Brand" class="w-128px text-gray-900 dark:text-white"
+                                                        data-uc-svg="" src="{{asset('./images/brand-06.svg')}}" />
+                                                </div>
+                                            </div>
+                                            <p class="fs-6 lg:fs-5 text-dark dark:text-white text-opacity-70">“
+                                                Un outil simple et puissant ! 
+                                                J’apprécie particulièrement la rapidité avec laquelle je peux convertir mes fichiers Excel en rapports exploitables. 
+                                                Datagraph a définitivement simplifié mes tâches d’analyse au quotidien.”
+                                            </p>
+                                        </div>
+                                        <div class="panel hstack gap-2 mt-2 lg:mt-4">
+                                            <img alt="Marie L." class="w-40px rounded-circle"
+                                                src="{{asset('./images/04.png')}}" />
+                                            <div class="panel vstack items-start gap-0">
+                                                <h6 class="h6 m-0">Marie L.</h6>
+                                                <span class="fs-7 opacity-70">Freelance en Data Science</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="px-3 sm:px-4 py-4 panel vstack justify-between gap-3 rounded-2 border">
+                                        <div class="panel vstack items-start gap-2">
+                                            <div class="panel">
+                                                <div class="hstack h-48px">
+                                                    <img alt="Brand" class="w-128px text-gray-900 dark:text-white"
+                                                        data-uc-svg="" src="{{asset('./images/brand-08.svg')}}" />
+                                                </div>
+                                            </div>
+                                            <p class="fs-6 lg:fs-5 text-dark dark:text-white text-opacity-70">“
+                                                Je recommande Datagraph à tous ceux qui travaillent avec des données ! 
+                                                Les options de personnalisation permettent de répondre à n’importe quel besoin, 
+                                                et le design des rapports donne une vraie touche professionnelle.”
+                                            </p>
+                                        </div>
+                                        <div class="panel hstack gap-2 mt-2 lg:mt-4">
+                                            <img alt="Thérèse M" class="w-40px rounded-circle"
+                                                src="{{asset('./images/03.png')}}" />
+                                            <div class="panel vstack items-start gap-0">
+                                                <h6 class="h6 m-0">Thérèse M</h6>
+                                                <span class="fs-7 opacity-70">Chef de Projet</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <a class="uc-link fw-bold d-inline-flex items-center gap-narrow" href="#">
+                                <span>Voir tout les avis clients</span>
+                                <i class="icon icon-1 unicon-arrow-right rtl:rotate-180"></i>
+                            </a> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section end -->
+        <!-- Section start -->
+        <!-- <div class="about-timeline section panel overflow-hidden bg-secondary dark:bg-gray-800" id="about-timeline">
+            <div class="section-outer panel py-6 xl:py-9">
+                <div class="container max-w-lg">
+                    <div class="section-inner panel">
+                        <div class="panel vstack justify-center items-center gap-4 sm:gap-6 xl:gap-8">
+                            <h2 class="h4 sm:h3 lg:h2 m-0 text-center"
+                                data-anime="onview: -100; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 100;">
+                                Comment </h2>
+                            <div class="panel w-100 swiper-parent">
+                                <div class="swiper-timeline swiper swiper-container overflow-unset"
+                                    data-uc-swiper="items: 1; gap: 0; dots: .swiper-pagination; disable-class: d-none; center: true; center-bounding: true;"
+                                    data-uc-swiper-m="items: 3;" data-uc-swiper-s="items: 2;">
+                                    <div class="swiper-wrapper"
+                                        data-anime="onview: -100; targets: &gt; *; translateX: [100, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                                        <div class="swiper-slide panel">
+                                            <div class="timeline-box panel vstack items-center gap-9 text-center">
+                                                <div class="image-wrap panel overflow-hidden w-200px">
+                                                    <img alt="Where the idea come up of Lexend :)"
+                                                        class="image w-100 origin-bottom"
+                                                        src="./public/assets/images/timeline-01.png" />
+                                                </div>
+                                                <div class="content panel vstack items-center px-3 xl:px-6">
+                                                    <h3 class="title h4 sm:h3 dark:text-white">2014</h3>
+                                                    <p class="desc fs-6 xl:fs-5 opacity-70 dark:text-white">Where the
+                                                        idea come up of Lexend :)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide panel">
+                                            <div class="timeline-box panel vstack items-center gap-9 text-center">
+                                                <div class="image-wrap panel overflow-hidden w-200px">
+                                                    <img alt="Launched our first business that can be created in minutes, build meaningful relationships."
+                                                        class="image w-100 origin-bottom"
+                                                        src="./public/assets/images/timeline-02.png" />
+                                                </div>
+                                                <div class="content panel vstack items-center px-3 xl:px-6">
+                                                    <h3 class="title h4 sm:h3 dark:text-white">2015</h3>
+                                                    <p class="desc fs-6 xl:fs-5 opacity-70 dark:text-white">Launched our
+                                                        first business that can be created in minutes, build meaningful
+                                                        relationships.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide panel">
+                                            <div class="timeline-box panel vstack items-center gap-9 text-center">
+                                                <div class="image-wrap panel overflow-hidden w-200px">
+                                                    <img alt="Opened our new office in Toronto, CA"
+                                                        class="image w-100 origin-bottom"
+                                                        src="./public/assets/images/timeline-03.png" />
+                                                </div>
+                                                <div class="content panel vstack items-center px-3 xl:px-6">
+                                                    <h3 class="title h4 sm:h3 dark:text-white">2016</h3>
+                                                    <p class="desc fs-6 xl:fs-5 opacity-70 dark:text-white">Opened our
+                                                        new office in Toronto, CA</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide panel">
+                                            <div class="timeline-box panel vstack items-center gap-9 text-center">
+                                                <div class="image-wrap panel overflow-hidden w-200px">
+                                                    <img alt="Moved to Silicon Valley whereas now we can focus on building out to help our employees."
+                                                        class="image w-100 origin-bottom"
+                                                        src="./public/assets/images/timeline-04.png" />
+                                                </div>
+                                                <div class="content panel vstack items-center px-3 xl:px-6">
+                                                    <h3 class="title h4 sm:h3 dark:text-white">2019</h3>
+                                                    <p class="desc fs-6 xl:fs-5 opacity-70 dark:text-white">Moved to
+                                                        Silicon Valley whereas now we can focus on building out to help
+                                                        our employees.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide panel">
+                                            <div class="timeline-box panel vstack items-center gap-9 text-center">
+                                                <div class="image-wrap panel overflow-hidden w-200px">
+                                                    <img alt="Opened a new office in London, UK."
+                                                        class="image w-100 origin-bottom"
+                                                        src="./public/assets/images/timeline-05.png" />
+                                                </div>
+                                                <div class="content panel vstack items-center px-3 xl:px-6">
+                                                    <h3 class="title h4 sm:h3 dark:text-white">2020</h3>
+                                                    <p class="desc fs-6 xl:fs-5 opacity-70 dark:text-white">Opened a new
+                                                        office in London, UK.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="swiper-slide panel">
+                                            <div class="timeline-box panel vstack items-center gap-9 text-center">
+                                                <div class="image-wrap panel overflow-hidden w-200px">
+                                                    <img alt="Top-rated software solution for service suppliers."
+                                                        class="image w-100 origin-bottom"
+                                                        src="./public/assets/images/timeline-06.png" />
+                                                </div>
+                                                <div class="content panel vstack items-center px-3 xl:px-6">
+                                                    <h3 class="title h4 sm:h3 dark:text-white">Today</h3>
+                                                    <p class="desc fs-6 xl:fs-5 opacity-70 dark:text-white">Top-rated
+                                                        software solution for service suppliers.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Section end -->
+        <!-- Section start -->
+        <div class="about-team section panel overflow-hidden" id="about-team">
+            <div class="section-outer panel py-6 xl:py-9">
+                <div class="container max-w-lg">
+                    <div class="section-inner panel">
+                        <div class="panel vstack justify-center items-center gap-4 sm:gap-6 xl:gap-8"
+                            data-anime="onview: -100; targets: &gt; *; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                            <h2 class="h4 sm:h3 lg:h2 m-0 text-center">Qui est autour de DataGraph</h2>
+                            <div class="row child-cols-6 sm:child-cols-4 lg:child-cols-3 col-match gx-2 lg:gx-4 gy-4 lg:gy-6"
+                                data-anime="onview: -100; targets: &gt; *; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});"
+                                data-uc-grid="">
+                                <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="Jérémie NGOYI MAOLE" class="w-100 rounded" src="https://snapcode.jeremiecode.fr/public/assets/images/home/about-me-img-2-with-bg.webp" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">Jérémie NGOYI MAOLE</h6>
+                                            <span class="fs-7 opacity-70">Développeur &amp; CEO</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="John Zellers" class="w-100 rounded" src="./public/assets/images/team-02.jpg" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">John Zellers</h6>
+                                            <span class="fs-7 opacity-70">Co-Founder</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="Kim Yun Son" class="w-100 rounded" src="./public/assets/images/team-03.jpg" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">Kim Yun Son</h6>
+                                            <span class="fs-7 opacity-70">Engineering Manager</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="André Garcia" class="w-100 rounded" src="./public/assets/images/team-04.jpg" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">André Garcia</h6>
+                                            <span class="fs-7 opacity-70">Product Manager</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="Peter Lary" class="w-100 rounded" src="./public/assets/images/team-05.jpg" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">Peter Lary</h6>
+                                            <span class="fs-7 opacity-70">UX Researcher</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="Henry Matt" class="w-100 rounded" src="./public/assets/images/team-06.jpg" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">Henry Matt</h6>
+                                            <span class="fs-7 opacity-70">Customer Success</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="Natalia" class="w-100 rounded" src="./public/assets/images/team-07.jpg" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">Natalia</h6>
+                                            <span class="fs-7 opacity-70">Lead of fun</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- <div>
+                                    <div class="panel vstack gap-2">
+                                        <img alt="Larry" class="w-100 rounded" src="./public/assets/images/team-08.jpg" />
+                                        <div class="panel vstack items-start gap-0">
+                                            <h6 class="h6 m-0">Larry</h6>
+                                            <span class="fs-7 opacity-70">Director of Joy</span>
+                                        </div>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Section end -->
+        <!-- Section start -->
+        <!-- <div class="cta section panel overflow-hidden"
+            data-anime="onview:-100; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 200;"
+            id="cta">
+            <div class="section-outer panel py-4 sm:py-6 xl:py-9 bg-secondary dark:bg-gray-800">
+                <div class="d-none lg:d-block"
+                    data-anime="onview: -100; targets: img; scale: [0.8, 1]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: 350;">
+                    <div class="position-absolute top-50 start-0 translate-middle-y ms-n6">
+                        <img alt="thinking" class="w-200px xl:w-250px d-block dark:d-none" src="./public/assets/images/thinking.svg" />
+                        <img alt="thinking-dark" class="w-200px xl:w-250px d-none dark:d-block"
+                            src="./public/assets/images/thinking-dark.svg" />
+                    </div>
+                    <div class="position-absolute top-50 end-0 translate-middle-y me-n6">
+                        <img alt="send-message" class="w-200px xl:w-250px d-block dark:d-none"
+                            src="./public/assets/images/send-message.svg" />
+                        <img alt="send-message-dark" class="w-200px xl:w-250px d-none dark:d-block"
+                            src="./public/assets/images/send-message-dark.svg" />
+                    </div>
+                </div>
+                <div class="d-none lg:d-block"
+                    data-anime="targets: &gt;*; scale: [0, 1]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 750});">
+                    <div class="position-absolute bottom-0 start-0 rotate-45"
+                        style="bottom: 30% !important; left: 24% !important">
+                        <img alt="star-2" class="w-24px text-gray-900 dark:text-white" data-uc-svg=""
+                            src="./public/assets/images/star-2.svg" />
+                    </div>
+                    <div class="position-absolute top-0 end-0 rotate-45"
+                        style="top: 50% !important; right: 21% !important">
+                        <img alt="star-1" class="w-32px text-gray-900 dark:text-white" data-uc-svg=""
+                            src="./public/assets/images/star-1.svg" />
+                    </div>
+                </div>
+                <div class="container max-w-xl">
+                    <div class="section-inner panel">
+                        <div class="vstack items-center gap-2 sm:gap-3 max-w-550px mx-auto text-center"
+                            data-anime="onview:-100; targets: &gt;*; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 200});">
+                            <h2 class="h3 sm:h1 m-0">We’re looking for people who share our vision!</h2>
+                            <p class="fs-5 xl:fs-4 text-dark dark:text-white text-opacity-70">Have what it takes to be
+                                one of us.</p>
+                            <a class="btn btn-md lg:btn-lg btn-primary text-white mt-1 xl:mt-2"
+                                href="page-career.php">View current openings</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <!-- Section end -->
+        </div>

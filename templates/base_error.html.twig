@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <meta content="Full-featured, professional-looking software, saas and startup website template."
+                name="description" />
+        <meta content="saas, saas template, site template, software, startup, digital product, html5, landing, marketing, bootstrap, uikit3, agency, ai, digital agency, it solutions, nodejs"
+                name="keywords" />
+        <title>{% block title %}Bienvenue!{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+            <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+            {# <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>"> #}
+            <link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/x-icon" />
+            <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/css/swiper-bundle.min.css') }}" />
+            <link rel="stylesheet" href="{{ asset('styles/css/animate.css') }}" />
+            <link rel="stylesheet" href="{{ asset('styles/css/tailwind.css') }}" />
+
+            <link href="favicon.ico" rel="icon" type="image/png" />
+            <!-- <link href="https://unistudio.co/html/Lexend" rel="canonical" /> -->
+            <meta content="#178d72" name="theme-color" />
+            <!-- Open Graph Tags -->
+            <meta content="en_US" property="og:locale" />
+            <meta content="website" property="og:type" />
+            <meta content="DataGraph" property="og:title" />
+            <meta content="Full-featured, Professional-looking SaaS, Software and Startup Site Template."
+                property="og:description" />
+            <meta content="https://unistudio.co/html/DataGraph/" property="og:url" />
+            <meta content="DataGraph" property="og:site_name" />
+            <!-- <meta content="https://unistudio.co/html/lexend/assets/./public/assets/common/seo-image.jpg" property="og:image" /> -->
+            <meta content="1180" property="og:image:width" />
+            <meta content="600" property="og:image:height" />
+            <meta content="image/png" property="og:image:type" />
+            <!-- Twitter Card Tags -->
+            <meta content="summary_large_image" name="twitter:card" />
+            <meta content="Lexend" name="twitter:title" />
+            <meta content="Full-featured, Professional-looking SaaS, Software and Startup Site Template."
+                name="twitter:description" />
+            <!-- <meta content="https://unistudio.co/html/lexend/assets/./public/assets/common/seo-image.jpg" name="twitter:image" /> -->
+            <link href="https://unistudio.co/html/lexend/" rel="canonical" />
+            <!-- preload head styles -->
+            <link href="{{ asset('styles/prettify.min.css')}}" rel="stylesheet" />
+            <link href="{{ asset('styles/unicons.min.css')}}" rel="stylesheet" />
+            <link href="{{ asset('styles/magic-cursor.min.css')}}" rel="stylesheet" />
+            <!-- Carousel - CSS Include -->
+            <link href="{{ asset('styles/swiper-bundle.min.css')}}" rel="stylesheet" />
+            <!-- include uni-core components -->
+            <link href="{{ asset('styles/uni-core.min.css')}}" rel="stylesheet" />
+            <!-- include main style -->
+            <link href="{{ asset('styles/main.min.purge.css')}}" rel="stylesheet" />
+            <!-- custom style -->
+            <link href="{{ asset('styles/custom.css')}}" rel="stylesheet" />
+
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+                integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+                crossorigin="anonymous" referrerpolicy="no-referrer" />
+        {% endblock %}
+
+
+    </head>
+<body class="uni-body panel bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-200 overflow-x-hidden disable-cursor">
+    {% block body %}{% endblock %}
+
+    {% include '_partials/_assets.html.twig' %} {# Inclure les chemins d'assets ici #}
+
+        <!-- ====== Back To Top Start -->
+            <div class="backtotop-wrap position-fixed bottom-0 end-0 z-99 m-2 vstack">
+                <div class="darkmode-trigger cstack w-40px h-40px rounded-circle text-none bg-gray-100 dark:bg-gray-700 dark:text-white"
+                    data-darkmode-toggle="">
+                    <label class="switch">
+                        <span class="sr-only">Dark mode toggle</span>
+                        <input type="checkbox" />
+                        <span class="slider fs-5"></span>
+                    </label>
+                </div>
+                <a class="btn btn-sm bg-primary text-white w-40px h-40px rounded-circle" data-uc-backtotop="" href="to_top">
+                    <i class="icon-2 fa-solid fa-chevron-up"></i>
+                </a>
+            </div>
+        <!-- ====== Back To Top End -->
+
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+                {% block importmap %}{{ importmap('app') }}{% endblock %}
+                    <!-- Body Wrap - End -->
+    <!-- include jquery & bootstrap js -->
+    <script defer="" src="{{ asset('js/jquery.min.js')}}"></script>
+    <script defer="" src="{{ asset('js/bootstrap.min.js')}}"></script>
+    <!-- include scripts -->
+    <script defer="" src="{{ asset('js/anime.min.js')}}"></script>
+    <!-- Carousel - Jquery Include -->
+
+    <!-- app head for bootstrap core -->
+    <script defer="" src="{{ asset('js/app-head-bs.js')}}"></script>
+    <!-- include scripts -->
+    <script src="{{ asset('js/uni-core-bundle.min.js')}}"></script>
+    <!-- include app script -->
+    <script defer="" src="{{ asset('js/app.js')}}"></script>
+    <script>
+
+
+        // Schema toggle via URL
+
+        const queryString = window.location.search;
+
+        const urlParams = new URLSearchParams(queryString);
+
+        const getSchema = urlParams.get("schema");
+
+        if (getSchema === "dark") {
+
+            setDarkMode(1);
+
+        } else if (getSchema === "light") {
+
+            setDarkMode(0);
+
+        }
+
+    </script>
+        {% endblock %}
+</body>
+
+</html>

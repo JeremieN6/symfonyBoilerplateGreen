@@ -1,0 +1,172 @@
+    <!--  Acccount modal -->
+    <div data-uc-modal="overlay: true" id="uc-account-modal">
+        <div class="uc-modal-dialog lg:max-w-500px bg-secondary text-dark dark:bg-gray-800 dark:text-white rounded">
+            <button
+                class="uc-modal-close-default top-0 ltr:end-0 rtl:start-0 rtl:end-auto m-2 p-0 border-0 icon-2 lg:icon-3 btn btn-md dark:text-white transition-transform duration-150 hover:rotate-90"
+                type="button">
+                <i class="unicon-close"></i>
+            </button>
+            <div class="panel vstack gap-2 md:gap-4 text-center">
+                <ul class="account-tabs-nav nav-x justify-center h6 py-2 border-bottom d-none"
+                    data-uc-switcher="animation: uc-animation-slide-bottom-small, uc-animation-slide-top-small">
+                    <li><a href="#">Connexion</a></li>
+                    <li><a href="#">Inscription</a></li>
+                    <li><a href="#">Mot de passe oublié</a></li>
+                    <li><a href="#">Conditions d'utilisation</a></li>
+                </ul>
+                <div
+                    class="account-tabs-content uc-switcher px-3 lg:px-4 py-4 lg:py-8 m-0 lg:mx-auto vstack justify-center items-center">
+                    <div class="w-100">
+                        <div class="panel vstack justify-center items-center gap-2 sm:gap-4 text-center">
+                            <h4 class="h5 lg:h4 m-0">Connexion</h4>
+                            <div class="panel vstack gap-4 w-100 sm:w-350px mx-auto">
+                                <form class="vstack gap-2">
+                                    <input class="form-control h-48px w-full bg-white dark:border-white dark:text-dark"
+                                        placeholder="Your email" required="" type="email" />
+                                    <input class="form-control h-48px w-full bg-white dark:border-white dark:text-dark"
+                                        placeholder="Password" required="" type="password" />
+                                    <div class="hstack justify-between items-start text-start">
+                                        <div class="form-check text-start rtl:text-end">
+                                            <input
+                                                class="form-check-input rounded-0 dark:bg-gray-900 dark:text-white dark:border-gray-700"
+                                                id="inputCheckRemember" type="checkbox" />
+                                            <label class="hstack justify-between form-check-label fs-7 sm:fs-6"
+                                                for="inputCheckRemember">Se souvenir de moi?</label>
+                                        </div>
+                                        <a class="uc-link" data-uc-switcher-item="2" href="#">Mot de passe oublié ?</a>
+                                    </div>
+                                    <button class="btn btn-primary btn-md text-white lg:mt-2" type="submit">Connexion</button>
+                                </form>
+                                <div class="panel">
+                                    <hr class="m-0" />
+                                    <span
+                                        class="position-absolute top-50 start-50 translate-middle p-1 fs-7 text-uppercase bg-white dark:bg-gray-800">Ou</span>
+                                </div>
+                                <div class="hstack gap-2">
+                                    <a class="hstack items-center justify-center flex-1 gap-1 h-48px text-none rounded border border-gray-900 dark:border-white border-opacity-10"
+                                        href="#google">
+                                        <i class="icon icon-1 unicon-logo-google"></i>
+                                    </a>
+                                    <a class="hstack items-center justify-center flex-1 gap-1 h-48px text-none rounded border border-gray-900 dark:border-white border-opacity-10"
+                                        href="#facebook">
+                                        <i class="icon icon-1 unicon-logo-facebook"></i>
+                                    </a>
+                                    <a class="hstack items-center justify-center flex-1 gap-1 h-48px text-none rounded border border-gray-900 dark:border-white border-opacity-10"
+                                        href="#x">
+                                        <i class="icon icon-1 unicon-logo-x-filled"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="fs-7 sm:fs-6">Pas encore de compte ? <a class="uc-link" data-uc-switcher-item="1"
+                                    href="#">S'inscrire</a></p>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <div class="panel vstack justify-center items-center gap-2 sm:gap-4 text-center">
+                            <h4 class="h5 lg:h4 m-0">Créer un compte</h4>
+                            <div class="panel vstack gap-4 w-100 sm:w-350px mx-auto">
+                                <form class="vstack gap-2">
+                                    <input class="form-control h-48px w-full bg-white dark:border-white dark:text-dark"
+                                        placeholder="Full name" required="" type="text" />
+                                    <input class="form-control h-48px w-full bg-white dark:border-white dark:text-dark"
+                                        placeholder="Your email" required="" type="email" />
+                                    <input class="form-control h-48px w-full bg-white dark:border-white dark:text-dark"
+                                        placeholder="Password" required="" type="password" />
+                                    <input class="form-control h-48px w-full bg-white dark:border-white dark:text-dark"
+                                        placeholder="Re-enter Password" required="" type="password" />
+                                    <div class="hstack text-start">
+                                        <div class="form-check text-start rtl:text-end">
+                                            <input
+                                                class="form-check-input rounded-0 dark:bg-gray-900 dark:text-white dark:border-gray-700"
+                                                required="" type="checkbox" />
+                                            <label class="hstack justify-between form-check-label fs-7 sm:fs-6">J'ai lu et j'accepte les <a class="uc-link ltr:ms-narrow rtl:me-narrow"
+                                                    data-uc-switcher-item="3" href="#">conditions d'utilisation</a>. </label>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-primary btn-md text-white lg:mt-2" type="submit">S'inscrire</button>
+                                </form>
+                                <div class="panel">
+                                    <hr class="m-0" />
+                                    <span
+                                        class="position-absolute top-50 start-50 translate-middle p-1 fs-7 text-uppercase bg-white dark:bg-gray-800">Ou</span>
+                                </div>
+                                <div class="hstack gap-2">
+                                    <a class="hstack items-center justify-center flex-1 gap-1 h-48px text-none rounded border border-gray-900 dark:border-white border-opacity-10"
+                                        href="#google">
+                                        <i class="icon icon-1 unicon-logo-google"></i>
+                                    </a>
+                                    <a class="hstack items-center justify-center flex-1 gap-1 h-48px text-none rounded border border-gray-900 dark:border-white border-opacity-10"
+                                        href="#facebook">
+                                        <i class="icon icon-1 unicon-logo-facebook"></i>
+                                    </a>
+                                    <a class="hstack items-center justify-center flex-1 gap-1 h-48px text-none rounded border border-gray-900 dark:border-white border-opacity-10"
+                                        href="#x">
+                                        <i class="icon icon-1 unicon-logo-x-filled"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="fs-7 sm:fs-6">Vous avez déjà un compte ? <a class="uc-link"
+                                    data-uc-switcher-item="0" href="#">Se connecter</a></p>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <div class="panel vstack justify-center items-center gap-2 sm:gap-4 text-center">
+                            <h4 class="h5 lg:h4 m-0">Réinitialiser le mot de passe</h4>
+                            <div class="panel w-100 sm:w-350px">
+                                <form class="vstack gap-2">
+                                    <input class="form-control h-48px w-full bg-white dark:border-white dark:text-dark"
+                                        placeholder="Your email" required="" type="email" />
+                                    <div class="form-check text-start rtl:text-end">
+                                        <input
+                                            class="form-check-input rounded-0 dark:bg-gray-900 dark:text-white dark:border-gray-700"
+                                            id="inputCheckVerify" required="" type="checkbox" />
+                                        <label class="form-check-label fs-7 sm:fs-6" for="inputCheckVerify"> <span>Je ne suis pas un robot</span>. </label>
+                                    </div>
+                                    <button class="btn btn-primary btn-md text-white lg:mt-2" type="submit">Réinitialiser le mot de passe</button>
+                                </form>
+                            </div>
+                            <p class="fs-7 sm:fs-6 mt-2 sm:m-0">Se souvenir du mot de passe ? <a class="uc-link"
+                                    data-uc-switcher-item="0" href="#">Connexion</a></p>
+                        </div>
+                    </div>
+                    <div class="w-100">
+                        <div class="panel vstack justify-center items-center gap-2 sm:gap-4">
+                            <h4 class="h5 lg:h4 m-0">Terms of use</h4>
+                            <div class="page-content panel fs-6 text-start max-h-400px overflow-scroll">
+                                <p>Terms of use dolor sit amet consectetur, adipisicing elit. Recusandae provident ullam
+                                    aperiam quo ad non corrupti sit vel quam repellat ipsa quod sed, repellendus
+                                    adipisci, ducimus ea modi odio assumenda.</p>
+                                <h5 class="h6 md:h5 mt-3 mb-1">Disclaimers</h5>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, cum esse possimus
+                                    officiis amet ea voluptatibus libero! Dolorum assumenda esse, deserunt ipsum ad
+                                    iusto! Praesentium error nobis tenetur at, quis nostrum facere excepturi architecto
+                                    totam.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, soluta alias
+                                    eaque modi ipsum sint iusto fugiat vero velit rerum.</p>
+                                <h5 class="h6 md:h5 mt-3 mb-1">Limitation on Liability</h5>
+                                <p>Sequi, cum esse possimus officiis amet ea voluptatibus libero! Dolorum assumenda
+                                    esse, deserunt ipsum ad iusto! Praesentium error nobis tenetur at, quis nostrum
+                                    facere excepturi architecto totam.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, soluta alias
+                                    eaque modi ipsum sint iusto fugiat vero velit rerum.</p>
+                                <h5 class="h6 md:h5 mt-3 mb-1">Copyright Policy</h5>
+                                <p>Dolor sit amet consectetur adipisicing elit. Sequi, cum esse possimus officiis amet
+                                    ea voluptatibus libero! Dolorum assumenda esse, deserunt ipsum ad iusto! Praesentium
+                                    error nobis tenetur at, quis nostrum facere excepturi architecto totam.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, soluta alias
+                                    eaque modi ipsum sint iusto fugiat vero velit rerum.</p>
+                                <h5 class="h6 md:h5 mt-3 mb-1">General</h5>
+                                <p>Sit amet consectetur adipisicing elit. Sequi, cum esse possimus officiis amet ea
+                                    voluptatibus libero! Dolorum assumenda esse, deserunt ipsum ad iusto! Praesentium
+                                    error nobis tenetur at, quis nostrum facere excepturi architecto totam.</p>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, soluta alias
+                                    eaque modi ipsum sint iusto fugiat vero velit rerum.</p>
+                            </div>
+                            <p class="fs-7 sm:fs-6">Do you agree to our terms? <a class="uc-link"
+                                    data-uc-switcher-item="1" href="#">Sign up</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,41 @@
+    <!-- Header start -->
+    <header class="uc-header header-default uc-navbar-sticky-wrap z-999"
+        data-uc-sticky="start: 100vh; show-on-up: true; animation: uc-animation-slide-top; sel-target: .uc-navbar-container; cls-active: uc-navbar-sticky; cls-inactive: uc-navbar-transparent; end: !*;"
+        style="--uc-nav-height: 80px">
+        <nav class="uc-navbar-container uc-navbar-float ft-tertiary z-1"
+            data-anime="translateY: [-40, 0]; opacity: [0, 1]; easing: easeOutExpo; duration: 750; delay: 0;">
+            <div class="container max-w-xl">
+                <div class="uc-navbar min-h-64px lg:min-h-80px text-gray-900 dark:text-white"
+                    data-uc-navbar="mode: click; animation: uc-animation-slide-top-small; duration: 150;">
+                    <div class="uc-navbar-left">
+                        <div class="uc-logo text-dark dark:text-white">
+                            <a class="panel text-none" href="{{path('app_main')}}" style="width: 140px">
+                                <!-- <img alt="DataGraph" class="dark:d-none" src="./public/assets/images/logo-light.svg" /> -->
+                                <img alt="DataGraph" class="dark:d-none" src="{{asset('./images/logo-light2.png')}}" alt="Logo Datagraph Light"/>
+                                <img alt="DataGraph" class="d-none dark:d-block" src="{{asset('./images/logo-dark2.png')}}" alt="Logo Datagraph Dark"/>
+                                <!-- <img alt="DataGraph" class="d-none dark:d-block" src="./public/assets/images/logo-dark.svg" /> -->
+                            </a>
+                        </div>
+                        <ul class="uc-navbar-nav gap-3 xl:gap-4 d-none lg:d-flex fw-medium ms-2">
+                            <li><a href="{{path('app_feature')}}">Fonctionnalités</a></li>
+                            <li><a href="{{path('app_pricing')}}">Tarifs</a></li>
+                            <li><a href="{{path('app_about')}}">A propos</a></li>
+                            <li><a href="{{path('app_contact')}}">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="uc-navbar-right">
+                        <div class="d-none xl:d-block">
+                            <a class="text-none fw-medium" data-uc-toggle="" href="#uc-contact-modal">
+                                <span>Voir une démonstration</span>
+                            </a>
+                        </div>
+                        <a class="btn btn-sm btn-primary text-white text-none d-none lg:d-inline-flex"
+                            href="{{path('app_application')}}">Commencez gratuitement</a>
+                        <a class="d-block lg:d-none" data-uc-navbar-toggle-icon="" data-uc-toggle=""
+                            href="#uc-menu-panel"></a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Site Header - End
