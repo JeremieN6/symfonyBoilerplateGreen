@@ -35,4 +35,6 @@ yarn-error.log
 
 ###< symfony/file-project ###
 ./backups/serverOld.js
+/assets/videos
 ###< symfony/file-project ###
+
