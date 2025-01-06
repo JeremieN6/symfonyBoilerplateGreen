@@ -84,6 +84,38 @@
     margin-left: 15px;
 }
 /* INSCRIPTION FORM */
+
+/* RAPPORT AI */
+.report-title {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    margin-bottom: 30px;
+}
+
+#reportOutput h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#reportOutput h3 {
+    margin-top: 20px;
+}
+
+#reportOutput p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+#reportOutput ul {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+/* RAPPORT AI */
 @media (min-width: 768px){
     .containerChartOptions{
         flex-direction:initial;
