@@ -87,7 +87,7 @@ class MainController extends AbstractController
     #[Route('/conditions-d-utilisation', name: 'app_terms')]
     public function usingConditions(): Response
     {
-        return $this->render('legal-pages/index-terms.html.twig', [
+        return $this->render('legal-pages/_terms.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }
@@ -95,7 +95,7 @@ class MainController extends AbstractController
     #[Route('/politique-de-confidentialié', name: 'app_privacy_page')]
     public function privacy(): Response
     {
-        return $this->render('legal-pages/index-privacy_page.html.twig', [
+        return $this->render('legal-pages/_privacy.html.twig', [
             'controller_name' => 'MainController',
         ]);
     }
