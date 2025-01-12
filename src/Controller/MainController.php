@@ -2,10 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Form\ContactFormType;
 use App\Repository\PlanRepository;
+use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mime\Email;
 
 class MainController extends AbstractController
 {
@@ -45,10 +52,68 @@ class MainController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
+    public function contact(
+        Request $request, 
+        MailerInterface $mailer,
+        EntityManagerInterface $entityManager): Response
     {
+        $contactForm = $this->createForm(ContactFormType::class);
+
+        $contactForm->handleRequest($request);
+
+        if ($contactForm->isSubmitted() && $contactForm->isValid()){
+            $contactFormEmail = $contactForm->get('email')->getData();
+            $contactFormName = $contactForm->get('name')->getData();
+            $contactFormSubject = $contactForm->get('subject')->getData();
+            $contactFormMessage = $contactForm->get('message')->getData();
+
+            $contactFormInfo = new Contact();
+            $contactFormInfo->setName($contactFormName);
+            $contactFormInfo->setEmail($contactFormEmail);
+            $contactFormInfo->setSubject($contactFormSubject);
+            $contactFormInfo->setMessage($contactFormMessage);
+
+            $entityManager->persist($contactFormInfo);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre email a bien été envoyé ✅!');
+
+            $data = $contactForm->getData();
+            // dd($data);
+
+            $defaultEmail = 'contact@datagraph.fr'; // Adresse de l'expéditeur par défaut
+            $senderName = $data->getName();        // Utilisez les getters
+            $senderEmail = $data->getEmail();      // Utilisez les getters
+            // $senderName = $data['name'];
+            // $senderEmail = $data['email'];
+            $emailMessage = 'Email envoyé par : ' . $senderName . "\n\nAdresse email : " .$senderEmail. "\n\n" . $data->getMessage();
+
+            // Version original avec la récupération de l'email de la personne remplissant le formulaire de contact
+            // $mailAdress = $data['email'];
+            // $emailMessage = $data['message'];
+
+            $email = (new Email())
+                // ->from($mailAdress)
+                ->from($defaultEmail)
+                ->to('contact@datagraph.fr')
+                ->subject('Email reçu depuis la page contact de Datagraph')
+                ->text($emailMessage);
+
+                $mailer->send($email);
+
+                // Utilisez Flashy pour afficher un message flash de succès
+                $this->addFlash('success', 'Votre email a bien été envoyé ✅!');
+
+                // Redirigez l'utilisateur vers la même page (rafraîchissement)
+                return $this->redirectToRoute('app_main');
+        }elseif ($contactForm->isSubmitted() && !$contactForm->isValid()) {
+            $this->addFlash('error', 'Une erreur est survenue lors de l\'envoie du mail. Veuillez réessayer.');
+
+        }
+
         return $this->render('contact/index.html.twig', [
-            'controller_name' => 'MainController',
+            'controller_name' => 'HomeController',
+            'contactForm' => $contactForm->createView()
         ]);
     }
 
