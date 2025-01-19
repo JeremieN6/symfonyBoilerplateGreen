@@ -47,6 +47,9 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $stripeId = null;
 
+    #[ORM\Column(type: 'integer')]
+    private ?int $reportAttempts = 1;
+    
     /**
      * @var Collection<int, Subscription>
      */
@@ -207,6 +210,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $subscription->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getReportAttempts(): ?int
+    {
+        return $this->reportAttempts;
+    }
+
+    public function setReportAttempts(?int $reportAttempts): static
+    {
+        $this->reportAttempts = $reportAttempts;
 
         return $this;
     }

@@ -3,7 +3,11 @@
 {% block title %}DataGraph - Outil d'analyse de masse | Page Application{% endblock %}
 
 {% block body %}
-
+{% include '/_partials/_flash.html.twig' %}
 {% include '_components/_application.html.twig' %}
+
+{# <pre>
+    {{ dump(connectedUser) }}
+</pre> #}
 
 {% endblock %}

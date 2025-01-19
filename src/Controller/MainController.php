@@ -4,14 +4,16 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactFormType;
-use App\Repository\PlanRepository;
-use Doctrine\ORM\EntityManager;
+use App\Repository\UsersRepository;
+use App\Service\OpenAiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Prime\FlasherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Mime\Email;
 
 class MainController extends AbstractController
@@ -27,12 +29,141 @@ class MainController extends AbstractController
     }
 
     #[Route('/application', name: 'app_application')]
-    public function application(): Response
-    {
-        return $this->render('application/index.html.twig', [
-            'controller_name' => 'MainController',
+    public function application(
+        Request $request,
+        OpenAiService $openAiService,
+        EntityManagerInterface $entityManager,
+        FlasherInterface $flasher,
+        UsersRepository $usersRepository
+    ): Response {
+        /** @var \App\Entity\Users|null $connectedUser */
+        $connectedUser = $usersRepository->find($this->getUser()->getId());
+    
+        // Gestion des requêtes GET : Afficher la page
+        if ($request->isMethod('GET')) {
+            // Si l'utilisateur est connecté, récupérer ses tentatives
+            $reportAttempts = $connectedUser ? $connectedUser->getReportAttempts() : 0;
+    
+            return $this->render('application/index.html.twig', [
+                'controller_name' => 'MainController',
+                'userIsConnected' => $connectedUser !== null,
+                'reportAttempts' => $reportAttempts,
+            ]);
+        }
+    
+        // Gestion des requêtes POST
+        if (!$connectedUser) {
+            return $this->json([
+                'error' => 'Vous devez être connecté.',
+                'redirectUrl' => $this->generateUrl('app_login'),
+            ], 403);
+        }
+    
+        // Vérification des essais restants
+        $roles = $connectedUser->getRoles();
+        $isAdmin = in_array('ROLE_ADMIN', $roles, true);
+        $userReportAttempts = $connectedUser->getReportAttempts();
+    
+        if (!$isAdmin && $userReportAttempts <= 0) {
+            return $this->json([
+                'error' => 'Essais épuisés',
+                'redirectUrl' => $this->generateUrl('app_pricing'),
+            ], 403);
+        }
+    
+        // Validation des données reçues
+        $data = json_decode($request->getContent(), true);
+        if (!isset($data['headers'], $data['rows'], $data['objective'])) {
+            return $this->json(['error' => 'Données invalides.'], 400);
+        }
+    
+        try {
+            $report = $openAiService->generateReport($data['headers'], $data['rows'], $data['objective']);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'Erreur lors de la génération du rapport.'], 500);
+        }
+    
+        // Décrémentation des essais restants
+        if (!$isAdmin) {
+            // Décrémenter les tentatives de l'utilisateur
+            $connectedUser->setReportAttempts($userReportAttempts - 1);
+            $entityManager->persist($connectedUser);
+            $entityManager->flush();
+        }
+    
+        return $this->json([
+            'report' => $report,
+            'message' => 'Rapport généré avec succès.',
         ]);
     }
+
+    // #[Route('/application', name: 'app_application')]
+    // public function application(
+    //     Request $request,
+    //     OpenAiService $openAiService,
+    //     EntityManagerInterface $entityManager,
+    //     FlasherInterface $flasher,
+    //     UsersRepository $usersRepository
+    // ): Response {
+    //     /** @var \App\Entity\Users|null $connectedUser */
+    //     $connectedUser = $this->getUser();
+    
+    //     // Gestion des requêtes GET : Afficher la page
+    //     if ($request->isMethod('GET')) {
+    //         // Si l'utilisateur est connecté, récupérer ses tentatives
+    //         $reportAttempts = $connectedUser ? $connectedUser->getReportAttempts() : 0;
+    
+    //         return $this->render('application/index.html.twig', [
+    //             'controller_name' => 'MainController',
+    //             'userIsConnected' => $connectedUser !== null,
+    //             'reportAttempts' => $reportAttempts,
+    //         ]);
+    //     }
+    
+    //     // Gestion des requêtes POST
+    //     if (!$connectedUser) {
+    //         return $this->json([
+    //             'error' => 'Vous devez être connecté.',
+    //             'redirectUrl' => $this->generateUrl('app_login'),
+    //         ], 403);
+    //     }
+    
+    //     // Vérification des essais restants
+    //     $roles = $connectedUser->getRoles();
+    //     $isAdmin = in_array('ROLE_ADMIN', $roles, true);
+    //     $userReportAttempts = $connectedUser->getReportAttempts();
+    
+    //     if (!$isAdmin && $userReportAttempts <= 0) {
+    //         return $this->json([
+    //             'error' => 'Essais épuisés',
+    //             'redirectUrl' => $this->generateUrl('app_pricing'),
+    //         ], 403);
+    //     }
+    
+    //     // Validation des données reçues
+    //     $data = json_decode($request->getContent(), true);
+    //     if (!isset($data['headers'], $data['rows'], $data['objective'])) {
+    //         return $this->json(['error' => 'Données invalides.'], 400);
+    //     }
+    
+    //     try {
+    //         $report = $openAiService->generateReport($data['headers'], $data['rows'], $data['objective']);
+    //     } catch (\Exception $e) {
+    //         return $this->json(['error' => 'Erreur lors de la génération du rapport.'], 500);
+    //     }
+    
+    //     // Décrémentation des essais restants
+    //     if (!$isAdmin) {
+    //         $connectedUser->setReportAttempts($userReportAttempts - 1);
+    //         $entityManager->persist($connectedUser);
+    //         $entityManager->flush();
+    //     }
+    
+    //     return $this->json([
+    //         'report' => $report,
+    //         'message' => 'Rapport généré avec succès.',
+    //     ]);
+    // }
 
     #[Route('/fonctionalités', name: 'app_feature')]
     public function features(): Response
