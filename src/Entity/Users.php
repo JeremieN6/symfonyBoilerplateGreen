@@ -225,4 +225,14 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function hasActiveSubscription(): bool
+    {
+        foreach ($this->subscriptions as $subscription) {
+            if ($subscription->getIsActive() && $subscription->getCurrentPeriodEnd() > new \DateTime()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

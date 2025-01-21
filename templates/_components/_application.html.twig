@@ -115,14 +115,20 @@
                                                 <option value="finance" class="text-dark dark:text-white text-opacity-70">Analyse financière</option>
                                                 <option value="trends" class="text-dark dark:text-white text-opacity-70">Étude des tendances</option>
                                             </select>
-                                        <!-- Gnérérer un rapport -->
-                                        <button id="generateAIReport"
-                                            class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">🤖
-                                            Générer Rapport IA</button> <br><br>
-                                            {% if reportAttempts > 1 %}
-                                            <p>Nombre d'essais restants : {{ reportAttempts }}</p>
+                                            <!-- Gnérérer un rapport -->
+                                            {% if app.user %}
+                                                {% if app.user.hasActiveSubscription() %}
+                                                    <button id="generateAIReport" class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">🤖 Générer Rapport IA</button>
+                                                {% elseif app.user.getReportAttempts() > 0 %}
+                                                    <p>Il vous reste {{ app.user.getReportAttempts() }} essais gratuits.</p>
+                                                    <button id="generateAIReport" class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">🤖 Générer Rapport IA</button>
+                                                {% else %}
+                                                    <p>Vous n'avez plus d'essais gratuits et aucun abonnement actif.</p>
+                                                    <a href="{{ path('app_pricing') }}">Souscrire à un plan</a>
+                                                {% endif %}
                                             {% else %}
-                                        {% endif %}
+                                                <p>Veuillez vous <a href="{{ path('app_login') }}">connecter</a> pour générer un rapport.</p>
+                                            {% endif %}
                                         <div id="reportOutput"></div>
                                         </div>
                                     </div>

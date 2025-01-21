@@ -48,9 +48,10 @@ class ReportController extends AbstractController
             $isAdmin = in_array('ROLE_ADMIN', $roles, true);
             $userReportAttempts = $connectedUser->getReportAttempts();
 
-            if (!$isAdmin) {
-                // Log the current value for debugging
-                $logger->info('Current report attempts value: ' . $userReportAttempts);
+            if (!$isAdmin && !$connectedUser->hasActiveSubscription()) {
+                if ($userReportAttempts <= 0) {
+                    return new JsonResponse(['error' => 'Essais épuisés.'], 403);
+                }
 
                 // Décrémenter les tentatives de l'utilisateur
                 $newReportAttempts = $userReportAttempts - 1;
