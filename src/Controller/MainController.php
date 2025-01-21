@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Entity\Users;
 use App\Form\ContactFormType;
+use App\Repository\PlanRepository;
 use App\Repository\UsersRepository;
 use App\Service\OpenAiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -176,10 +177,21 @@ class MainController extends AbstractController
     }
 
     #[Route('/tarifs', name: 'app_pricing')]
-    public function pricing(): Response
+    public function pricing(PlanRepository $planRepository): Response
     {
+        $businessAnnualyPlan = $planRepository->findBusinessAnnualyPlan();
+        $businessMonthlyPlan = $planRepository->findBusinessMonthlyPlan();
+        $basicPlan = $planRepository->findBasicPlan();
+    
+        if (!$businessMonthlyPlan || !$basicPlan || !$businessAnnualyPlan) {
+            throw $this->createNotFoundException('Les plans requis ne sont pas disponibles.');
+        }
+    
         return $this->render('pricing/index.html.twig', [
             'controller_name' => 'MainController',
+            'businessAnnualyPlan' => $businessAnnualyPlan,
+            'businessMonthlyPlan' => $businessMonthlyPlan,
+            'basicPlan' => $basicPlan,
         ]);
     }
 
