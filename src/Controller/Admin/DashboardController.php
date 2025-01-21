@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Contact;
 use App\Entity\Invoice;
 use App\Entity\Newsletter;
 use App\Entity\Plan;
@@ -58,6 +59,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::section('Utilisateurs');
         yield MenuItem::linkToCrud('Utilisateur', 'fa fa-users', Users::class);
         yield MenuItem::linkToCrud('Newsletter', 'fa fa-newspaper-o', Newsletter::class);
+        yield MenuItem::linkToCrud('Contact', 'fa fa-address-book', Contact::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
 }

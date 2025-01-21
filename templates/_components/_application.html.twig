@@ -118,7 +118,11 @@
                                         <!-- Gnérérer un rapport -->
                                         <button id="generateAIReport"
                                             class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">🤖
-                                            Générer Rapport IA</button>
+                                            Générer Rapport IA</button> <br><br>
+                                            {% if reportAttempts > 1 %}
+                                            <p>Nombre d'essais restants : {{ reportAttempts }}</p>
+                                            {% else %}
+                                        {% endif %}
                                         <div id="reportOutput"></div>
                                         </div>
                                     </div>
@@ -161,3 +165,20 @@
             </div>
         </div>
         <!-- Section end -->
+
+        {# <script>
+            // Définir le délai (en millisecondes) et l'URL de redirection
+            const redirectionDelay = 5000; // Durée du message (5 secondes)
+            const redirectUrl = "{{ redirectUrl }}";
+            // URL dynamique injectée depuis PHP
+
+            // Déclencher la redirection après le délai
+            setTimeout(() => {
+            window.location.href = redirectUrl;
+            }, redirectionDelay);
+        </script> #}
+
+        <script>
+            const userIsConnected = {{ userIsConnected ? 'true' : 'false' }};
+            const reportAttempts = {{ reportAttempts }};
+        </script>

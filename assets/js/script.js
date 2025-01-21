@@ -14,14 +14,28 @@ let chartInstance = null; // Instance du graphique actuel
 let parsedData = null; // Données CSV stockées globalement
 
 // Gestion des événements
-fileInput.addEventListener("change", handleFile);
-chartTypeSelect.addEventListener("change", updateChart);
-updateTitleButton.addEventListener("click", updateChart);
-chartColorInput.addEventListener("input", updateChart);
-xColumnSelect.addEventListener("change", updateChart);
-yColumnSelect.addEventListener("change", updateChart);
-exportPngButton.addEventListener("click", exportToPNG);
-exportPdfButton.addEventListener("click", exportToPDF);
+function addEventListenerIfExists(selector, event, handler) {
+    const element = document.getElementById(selector);
+    if (element) {
+        element.addEventListener(event, handler);
+    } else {
+        console.warn(`Élément avec l'ID "${selector}" introuvable.`);
+    }
+}
+
+// Vérifiez si vous êtes sur la bonne page
+if (window.location.pathname === "/application") {
+    // Ajout des gestionnaires d'événements
+    addEventListenerIfExists("file-input", "change", handleFile);
+    addEventListenerIfExists("chart-type", "change", updateChart);
+    addEventListenerIfExists("x-column", "change", updateChart);
+    addEventListenerIfExists("y-column", "change", updateChart);
+    addEventListenerIfExists("chart-title", "input", updateChart);
+    addEventListenerIfExists("update-title", "click", updateChart);
+    addEventListenerIfExists("chart-color", "input", updateChart);
+    addEventListenerIfExists("export-png", "click", exportToPNG);
+    addEventListenerIfExists("export-pdf", "click", exportToPDF);
+}
 
 // Fonction pour gérer l'importation du fichier CSV
 function handleFile(event) {
@@ -50,7 +64,7 @@ function handleFile(event) {
 function parseCSV(data) {
     // Détection du séparateur (virgule ou point-virgule)
     const separator = data.includes(";") ? ";" : ",";
-    
+
     // Découpage des lignes et colonnes en fonction du séparateur détecté
     const rows = data.trim().split("\n").map(row => row.split(separator));
     const headers = rows[0].map(header => header.trim());
@@ -183,134 +197,101 @@ function exportToPDF() {
     pdf.save("graphique.pdf");
 }
 
-// document.getElementById('generateAIReport').addEventListener('click', async () => {
-// // Récupérer l'objectif sélectionné
-//     const objective = document.getElementById('analysisObjective').value;
+if (window.location.pathname === "/application") {
+    document.getElementById('generateAIReport').addEventListener('click', async () => {
+        const objective = document.getElementById('analysisObjective').value;
 
-//     // Vérifier si parsedData existe et est valide
-//     if (!parsedData || !parsedData.headers || !parsedData.dataRows) {
-//         alert("Veuillez importer un fichier CSV ou XLSX valide.");
-//         return;
-//     }
+        // Vérifie si les données sont valides
+        if (!parsedData || !parsedData.headers || !parsedData.dataRows) {
+            alert("Veuillez importer un fichier CSV ou XLSX valide.");
+            return;
+        }
 
-//     try {
-//         // Créer un résumé des données ou toute autre information nécessaire pour l'API
-//         const dataSummary = {
-//             headers: parsedData.headers,
-//             dataRows: parsedData.dataRows,
-//         };
+        // Vérifie si l'objectif est défini
+        if (!objective) {
+            alert("Veuillez entrer un objectif d'analyse.");
+            return;
+        }
 
-//         // Envoyer les données vers le serveur pour générer le rapport AI
-//         const response = await fetch("http://localhost:3000/api/generate-report", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({ dataSummary, objective }),
-//         });
-
-//         // Vérifier la réponse du serveur
-//         const result = await response.json();
-
-//         if (response.ok) {
-//             // Afficher le rapport dans l'élément HTML
-//             document.getElementById('reportOutput').innerHTML = result.report;
-//         } else {
-//             // Afficher un message d'erreur si la réponse est mauvaise
-//             document.getElementById('reportOutput').innerText = `Erreur: ${result.error}`;
-//         }
-//     } catch (error) {
-//         // Gérer les erreurs liées à la connexion ou autres
-//         console.error("Erreur lors de la génération du rapport:", error);
-//         alert("Une erreur est survenue lors de la génération du rapport.");
-//     }
-// });
-
-// async function generateAIReport(parsedData) {
-//     // Appel API
-//     const headers = parsedData.headers; // ['Mois', 'Ventes', 'Profit'] Par exemple - En fonction des données uploadé
-//     const rows = parsedData.dataRows; // Données des mois Par exemple - En fonction des données uploadé
-
-//     // Construction du texte à partir des données
-//     let dataSummary = `Voici les données du tableau :\n\n`;
-
-//     dataSummary += headers.join(" | ") + "\n"; // En-têtes
-//     dataSummary += "-".repeat(headers.join(" | ").length) + "\n"; // Ligne de séparation
-
-//     rows.forEach((row) => {
-//         dataSummary += row.join(" | ") + "\n"; // Lignes de données
-//     });
-
-//     console.log(dataSummary);
-
-//     const messages = [
-//         { role: "system", content: "Tu es un assistant qui analyse des données et génère des rapports." },
-//         { role: "user", content: `
-//             Analyse ces données et génère un rapport textuel en identifiant les points clés :
-//             ${dataSummary}
-
-//             Indique :
-//             - Le mois avec les ventes les plus élevées et le profit le plus élevé.
-//             - Le mois avec les ventes les plus faibles.
-//             - Les tendances générales (augmentation/diminution).
-//             - Les recommandations pour améliorer les ventes et les profits.
-//         ` },
-//     ];
-
-//     try {
-//         // Envoie la requête à ton serveur local
-//         const response = await fetch("/api/openai", {
-//             method: "POST",
-//             headers: {
-//                 "Content-Type": "application/json",
-//             },
-//             body: JSON.stringify({ messages }), // Envoie uniquement les messages au backend
-//         });
-
-//         // Vérifie la réponse
-//         if (!response.ok) {
-//             const errorData = await response.json();
-//             console.error("Erreur API (via serveur local):", errorData);
-//             throw new Error(`Erreur API OpenAI via serveur: ${errorData.error}`);
-//         }
-
-//         const data = await response.json();
-//         return data.choices[0].message.content; // Retourne le contenu généré par OpenAI
-//     } catch (error) {
-//         console.error("Erreur lors de la génération du rapport:", error);
-//         throw error;
-//     }
-// }
-
-document.getElementById('generateAIReport').addEventListener('click', async () => {
-    const objective = document.getElementById('analysisObjective').value;
-
-    if (!parsedData || !parsedData.headers || !parsedData.dataRows) {
-        alert("Veuillez importer un fichier CSV ou XLSX valide.");
-        return;
-    }
-
-    try {
+        // Prépare les données à envoyer à l'API
         const dataSummary = {
             headers: parsedData.headers,
             dataRows: parsedData.dataRows,
         };
 
-        const response = await fetch("/api/generate-report", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ dataSummary, objective }),
-        });
+        // Prépare la requête à envoyer à l'API
+        const requestPayload = {
+            dataSummary,
+            objective,
+        };
 
-        const result = await response.json();
+        try {
+            if (userIsConnected === false) {
+                // Si l'utilisateur n'est pas connecté
+                mockResponse = {
+                    status: 403,
+                    json: async () => ({
+                        error: 'Vous devez être connecté.',
+                        redirectUrl: '/login',
+                    }),
+                };
+            } else if (reportAttempts < 1) {
+                // Si l'utilisateur est connecté mais n'a plus d'essais
+                mockResponse = {
+                    status: 403,
+                    json: async () => ({
+                        error: 'Vous avez utilisé tous vos essais. Veuillez souscrire à un plan.',
+                        redirectUrl: '/tarifs',
+                    }),
+                };
+            } else {
+                // Si l'utilisateur est connecté et a encore des essais, faire la requête réelle
+                mockResponse = await fetch("/api/generate-report", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestPayload),
+                });
+            }
 
-        if (response.ok) {
+            const response = mockResponse;
+
+            if (!response.ok) {
+                // Si la réponse de l'API n'est pas ok (code HTTP 4xx ou 5xx)
+                const result = await response.json();
+                if (response.status === 403) {
+                    // Gestion des erreurs spécifiques, comme utilisateur non connecté ou essais épuisés
+                    flasher.warning(result.error || "Une erreur est survenue.", { timeout: 5000 });
+                    // Optionnel : rediriger l'utilisateur après un délai
+                    if (result.redirectUrl) {
+                        setTimeout(() => {
+                            window.location.href = result.redirectUrl;
+                        }, 5000);
+                    }
+                } else {
+                    throw new Error(`Erreur HTTP : ${response.status}`);
+                }
+                return;
+            }
+
+            // Lire la réponse JSON de l'API
+            const result = await response.json();
+            console.log(result); // Vérifie la structure de la réponse de l'API
+
+            // Si la génération du rapport a réussi
+            if (result && result.message) {
+                flasher.success(result.message, { timeout: 5000 });
+                // Décrémenter le nombre d'essais restants
+                reportAttempts -= 1;
+                document.querySelector('p').innerText = `Nombre d'essais restants : ${reportAttempts}`;
+            } else {
+                flasher.success("Rapport généré avec succès.", { timeout: 5000 });
+            }
+
+            // Formater le rapport reçu
             let report = result.report;
-            
-            // Identifier le titre principal (assume que c'est la première ligne)
-            const title = "Rapport d'Analyse des Données";
+            const title = "Rapport d'Analyse";
             if (report.startsWith(title)) {
                 report = report.replace(title, `<h1 class="report-title">${title}</h1>`);
             }
@@ -328,11 +309,12 @@ document.getElementById('generateAIReport').addEventListener('click', async () =
 
             // Insérer le rapport formaté dans l'élément HTML
             document.getElementById('reportOutput').innerHTML = formattedReport;
-        } else {
-            document.getElementById('reportOutput').innerText = `Erreur: ${result.error}`;
+        } catch (error) {
+            // Gestion des erreurs de réseau ou autres erreurs d'exécution
+            console.error("Erreur lors de l'envoi de la requête à l'API :", error);
+            flasher.warning("Une erreur est survenue lors de la génération du rapport.", { timeout: 5000 });
         }
-    } catch (error) {
-        console.error("Erreur lors de la génération du rapport:", error);
-        alert("Une erreur est survenue lors de la génération du rapport.");
-    }
-});
+    });
+} else {
+    console.info('Information : Le script de génération de rapport ne s’exécute pas car vous n’êtes pas sur la page de gestion de l\'application.');
+}
