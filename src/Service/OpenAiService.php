@@ -34,11 +34,23 @@ class OpenAiService
         Données d'entrée :
         {$dataSummary}
 
-        Génère un rapport qui inclut :
-        - Le mois avec les ventes les plus élevées et le profit le plus élevé.
-        - Le mois avec les ventes les plus faibles.
-        - Les tendances générales (augmentation/diminution).
-        - Les recommandations pour améliorer les ventes et les profits.
+        Génère un rapport structuré en HTML qui inclut les sections suivantes :
+        <h3>Résumé</h3>
+        <p>Un résumé général des données et des points clés.</p>
+
+        <h3>Analyse des données</h3>
+        <p>Analyse des données fournies, y compris les tendances, les anomalies et les points importants.</p>
+
+        <h3>Points forts</h3>
+        <p>Les points forts des données, tels que les meilleures performances, les valeurs maximales, etc.</p>
+
+        <h3>Points faibles</h3>
+        <p>Les points faibles des données, tels que les performances les plus faibles, les valeurs minimales, etc.</p>
+
+        <h3>Recommandations</h3>
+        <p>Des recommandations basées sur l'analyse des données pour améliorer les performances ou atteindre les objectifs.</p>
+
+        Assure-toi que chaque section est bien formatée en HTML et facile à lire.
         TEXT;
 
         // Préparer les données pour l'API OpenAI
