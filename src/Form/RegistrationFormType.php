@@ -23,14 +23,14 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'label' => false,
                 'attr' => [
-                    'class' => "form-control h-48px w-full bg-white dark:bg-opacity-0 dark:text-white dark:border-gray-300 dark:border-opacity-30",
+                    'class' => "form-control h-48px w-full bg-white dark:bg-opacity-0 dark:text-white dark:border-gray-300 dark:border-opacity-30 my-5",
                     'placeholder' => 'Email'
                     ]
             ])
             ->add('pseudo', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'class' => "form-control h-48px w-full bg-white dark:bg-opacity-0 dark:text-white dark:border-gray-300 dark:border-opacity-30",
+                    'class' => "form-control h-48px w-full bg-white dark:bg-opacity-0 dark:text-white dark:border-gray-300 dark:border-opacity-30 my-5",
                     'placeholder' => 'Pseudo'
                     ]
             ])
@@ -41,7 +41,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'attr' => [
                     'placeholder' => 'Mot de passe',
-                    'class' => 'form-control h-48px w-full bg-white dark:bg-opacity-0 dark:text-white dark:border-gray-300 dark:border-opacity-30',
+                    'class' => 'form-control h-48px w-full bg-white dark:bg-opacity-0 dark:text-white dark:border-gray-300 dark:border-opacity-30 my-5',
                     'autocomplete' => 'new-password',
                 ],
                 'constraints' => [
@@ -69,12 +69,12 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-            ->add('submit', SubmitType::class, [
-                'label' => 'S\'inscrire',
-                'attr' => [
-                    'class' => "w-full px-5 py-3 mb-4 text-base text-white transition duration-300 ease-in-out border rounded-md cursor-pointer border-primary bg-primary hover:bg-blue-dark",
-                    ]
-            ])
+            // ->add('submit', SubmitType::class, [
+            //     'label' => 'S\'inscrire',
+            //     'attr' => [
+            //         'class' => "w-full px-5 py-3 mb-4 text-base text-white transition duration-300 ease-in-out border rounded-md cursor-pointer border-primary bg-primary hover:bg-blue-dark",
+            //         ]
+            // ])
         ;
     }
 

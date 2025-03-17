@@ -77,7 +77,7 @@
                             data-anime="targets: &gt; *; scale: [0.9, 1]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 750});">
                             <div
                                 class="panel text-center overflow-hidden rounded-3 border border-5 border-dark dark:border-white dark:border-opacity-20">
-                                <img alt="Main hero image" src="{{asset('./images/dashboard.jpg')}}" />
+                                <img alt="Main hero image" src="{{asset('./images/dashboard.png')}}" />
                             </div>
                             <div class="position-absolute bottom-0 ltr:end-0 rtl:start-0 ltr:me-n8 rtl:ms-n8 mb-n8">
                                 <img alt="sitting" class="w-200px d-block dark:d-none" src="{{asset('./images/sitting.svg')}}" />
@@ -482,12 +482,13 @@
                             <div class="content panel">
                                 <div class="row child-cols-12 sm:child-cols-6 xl:child-cols-4 col-match justify-center g-2 lg:g-4"
                                     data-anime="onview: -100; targets: &gt;*; translateY: [48, 0]; opacity: [0, 1]; easing: spring(1, 80, 10, 0); duration: 450; delay: anime.stagger(100, {start: 400});">
+                                    {% if basicPlan %}
                                     <div>
                                         <div
                                             class="tier panel vstack gap-2 xl:gap-4 px-3 py-4 sm:p-4 lg:p-6 rounded lg:rounded-2 bg-secondary dark:bg-gray-800">
                                             <div class="panel">
-                                                <h3 class="title h5 sm:h4 dark:text-white">Essentials</h3>
-                                                <p class="desc dark:text-whiteopacity-70 dark:opacity-80">Pour une simple mise en clarté de vos données</p>
+                                                <h3 class="title h5 sm:h4 dark:text-white">{{ basicPlan.name }}</h3>
+                                                <p class="desc dark:text-whiteopacity-70 dark:opacity-80">{{ basicPlan.description | raw}}</p>
                                             </div>
                                             <div class="panel">
                                                 <div class="panel vstack gap-narrow">
@@ -495,18 +496,22 @@
                                                     <span class="fs-7 opacity-70">Upload de vos données en illimité</span>
                                                     <div class="vstack gap-1 justify-center text-center mt-3">
                                                         <a class="btn btn-md sm:btn-sm lg:btn-md btn-primary text-white"
-                                                            href="sign-up.php">Essayer gratuitement</a>
+                                                            href="{{ basicPlan.paymentLink }}">Essayer gratuitement</a>
                                                         <span class="fs-7 opacity-70 min-h-24px">Aucune carte de crédit nécessaire</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="panel">
                                                 <div class="panel vstack gap-2">
-                                                    <span class="fs-6 fw-bold dark:text-white">Fonctionnalités clés:</span>
+                                                    <span class="fs-6 fw-bold text-gray-900 dark:text-white">Fonctionnalités clés:</span>
                                                     <div class="hstack gap-1 fs-7">
                                                         <i
                                                             class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
                                                         <span>Upload de données en illimité (CSV, XLSX)</span>
+                                                    </div>
+                                                    <div class="hstack gap-1 fs-7">
+                                                        <i class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
+                                                        <span>Choix entre plusieurs types de graphique</span>
                                                     </div>
                                                     <div class="hstack gap-1 fs-7">
                                                         <i
@@ -517,29 +522,31 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {% endif %}
+                                    {% if businessAnnualyPlan %}
                                     <div>
                                         <div
                                             class="tier panel vstack gap-2 xl:gap-4 px-3 py-4 sm:p-4 lg:p-6 rounded lg:rounded-2 bg-secondary dark:bg-gray-800">
                                             <span
                                                 class="position-absolute top-0 ltr:end-0 rtl:start-0 m-1 d-inline-flex py-narrow px-1 bg-primary rounded-1 text-white fs-7 fw-medium">Populaire</span>
                                             <div class="panel">
-                                                <h3 class="title h5 sm:h4 dark:text-white">Business</h3>
-                                                <p class="desc dark:text-whiteopacity-70 dark:opacity-80">Pour une personnalisation & une analyse de vos données.</p>
+                                                <h3 class="title h5 sm:h4 dark:text-white">{{ businessAnnualyPlan.name }}</h3>
+                                                <p class="desc dark:text-whiteopacity-70 dark:opacity-80">{{ businessAnnualyPlan.description | raw}}</p>
                                             </div>
                                             <div class="panel">
                                                 <div class="panel vstack gap-narrow">
-                                                    <h5 class="title h3 sm:h2 m-0 dark:text-white">29€ EUR</h5>
+                                                    <h5 class="title h3 sm:h2 m-0 dark:text-white">{{ businessAnnualyPlan.price }}€ EUR</h5>
                                                     <span class="fs-7 opacity-70">Montant annuel</span>
                                                     <div class="vstack gap-1 justify-center text-center mt-3">
                                                         <a class="btn btn-md sm:btn-sm lg:btn-md btn-primary text-white"
-                                                            href="sign-up.php">Essayer</a>
+                                                            href="{{ businessAnnualyPlan.paymentLink }}">S'abonner</a>
                                                         <!-- <span class="fs-7 opacity-70 min-h-24px">No credit card required</span> -->
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="panel">
                                                 <div class="panel vstack gap-2">
-                                                    <span class="fs-6 fw-bold dark:text-white">Pour aller plus loin:</span>
+                                                    <span class="fs-6 fw-bold text-gray-900 dark:text-white">Pour aller plus loin:</span>
                                                     <div class="hstack gap-1 fs-7">
                                                         <i
                                                             class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
@@ -576,58 +583,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- <div>
-                                        <div
-                                            class="tier panel vstack gap-2 xl:gap-4 px-3 py-4 sm:p-4 lg:p-6 rounded lg:rounded-2 bg-secondary dark:bg-gray-800">
-                                            <div class="panel">
-                                                <h3 class="title h5 sm:h4 dark:text-white">Enterprise</h3>
-                                                <p class="desc dark:text-whiteopacity-70 dark:opacity-80">Pour une analyse poussée de vos données et plus.</p>
-                                            </div>
-                                            <div class="panel">
-                                                <div class="panel vstack gap-narrow">
-                                                    <h5 class="title h3 sm:h2 m-0 dark:text-white">Let’s talk</h5>
-                                                    <span class="fs-7 opacity-70">Per‑seat or per‑tool pricing</span>
-                                                    <div class="vstack gap-1 justify-center text-center mt-3">
-                                                        <a class="btn btn-md sm:btn-sm lg:btn-md btn-dark text-white dark:bg-white dark:text-dark dark:hover:bg-secondary"
-                                                            href="page-contact.php">Contact sales</a>
-                                                        <span class="fs-7 opacity-70 min-h-24px">Respond within 24 hrs
-                                                            max</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="panel">
-                                                <div class="panel vstack gap-2">
-                                                    <span class="fs-6 fw-bold dark:text-white">Everything in Business,
-                                                        plus:</span>
-                                                    <div class="hstack gap-1 fs-7">
-                                                        <i
-                                                            class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
-                                                        <span>Unlimited files uploads</span>
-                                                    </div>
-                                                    <div class="hstack gap-1 fs-7">
-                                                        <i
-                                                            class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
-                                                        <span>Real-time tracking and notifications</span>
-                                                    </div>
-                                                    <div class="hstack gap-1 fs-7">
-                                                        <i
-                                                            class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
-                                                        <span>User performance</span>
-                                                    </div>
-                                                    <div class="hstack gap-1 fs-7">
-                                                        <i
-                                                            class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
-                                                        <span>SSO support and custom user roles</span>
-                                                    </div>
-                                                    <div class="hstack gap-1 fs-7">
-                                                        <i
-                                                            class="cstack w-16px h-16px bg-primary text-white rounded-circle unicon-checkmark fw-bold"></i>
-                                                        <span>Bulk send &amp; Forms*</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> -->
+                                    {% endif %}
                                 </div>
                             </div>
                             <!-- <p class="text-center text-gray-900 dark:text-white text-opacity-70"
@@ -692,7 +648,7 @@
                                                         <div class="panel">
                                                             <i class="icon icon-4 unicon-quotes text-primary"></i>
                                                             <p
-                                                                class="fs-6 sm:fs-5 lg:fs-4 fw-bold mt-1 sm:mt-4 dark:text-white">
+                                                                class="fs-6 sm:fs-5 lg:fs-4 fw-bold mt-1 sm:mt-4 text-gray-900 dark:text-white">
 
                                                                 “Datagraph m’a fait gagner un temps précieux ! En quelques clics, 
                                                                 j’obtiens des graphiques clairs et des rapports adaptés à mes présentations. 
@@ -719,7 +675,7 @@
                                                         <div class="panel">
                                                             <i class="icon icon-4 unicon-quotes text-primary"></i>
                                                             <p
-                                                                class="fs-6 sm:fs-5 lg:fs-4 fw-bold mt-1 sm:mt-4 dark:text-white">
+                                                                class="fs-6 sm:fs-5 lg:fs-4 fw-bold mt-1 sm:mt-4 text-gray-900 dark:text-white">
 
                                                                 “Un outil simple et puissant ! 
                                                                 J’apprécie particulièrement la rapidité avec laquelle je peux convertir mes fichiers Excel en rapports exploitables. 
@@ -746,7 +702,7 @@
                                                         <div class="panel">
                                                             <i class="icon icon-4 unicon-quotes text-primary"></i>
                                                             <p
-                                                                class="fs-6 sm:fs-5 lg:fs-4 fw-bold mt-1 sm:mt-4 dark:text-white">
+                                                                class="fs-6 sm:fs-5 lg:fs-4 fw-bold mt-1 sm:mt-4 text-gray-900 dark:text-white">
                                                                 “Je recommande Datagraph à tous ceux qui travaillent avec des données ! 
                                                                 Les options de personnalisation permettent de répondre à n’importe quel besoin, 
                                                                 et le design des rapports donne une vraie touche professionnelle.”

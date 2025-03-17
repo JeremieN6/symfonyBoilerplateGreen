@@ -2,28 +2,105 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Entity\Users;
+use App\Form\ContactFormType;
 use App\Repository\PlanRepository;
+use App\Repository\UsersRepository;
+use App\Service\OpenAiService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use Flasher\Prime\FlasherInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Mime\Email;
 
 class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
     public function index(
+        PlanRepository $planRepository
     ): Response
     {
+        $businessAnnualyPlan = $planRepository->findBusinessAnnualyPlan();
+        $businessMonthlyPlan = $planRepository->findBusinessMonthlyPlan();
+        $basicPlan = $planRepository->findBasicPlan();
+    
+        if (!$businessMonthlyPlan || !$basicPlan || !$businessAnnualyPlan) {
+            throw $this->createNotFoundException('Les plans requis ne sont pas disponibles.');
+        }
 
         return $this->render('main/main.html.twig', [
             'controller_name' => 'MainController',
+            'businessAnnualyPlan' => $businessAnnualyPlan,
+            'businessMonthlyPlan' => $businessMonthlyPlan,
+            'basicPlan' => $basicPlan
         ]);
     }
 
     #[Route('/application', name: 'app_application')]
-    public function application(): Response
-    {
-        return $this->render('application/index.html.twig', [
-            'controller_name' => 'MainController',
+    public function application(
+        Request $request,
+        OpenAiService $openAiService,
+        EntityManagerInterface $entityManager,
+        FlasherInterface $flasher,
+        UsersRepository $usersRepository
+    ): Response {
+        // Vérifiez si un utilisateur est connecté
+        /** @var Users $loggedInUser */
+        $loggedInUser = $this->getUser();
+        $connectedUser = $loggedInUser ? $usersRepository->find($loggedInUser->getId()) : null;
+
+        // Gestion des requêtes GET : Afficher la page
+        if ($request->isMethod('GET')) {
+            // Si l'utilisateur est connecté, récupérer ses tentatives
+            $reportAttempts = $connectedUser ? $connectedUser->getReportAttempts() : 0;
+
+            return $this->render('application/index.html.twig', [
+                'controller_name' => 'MainController',
+                'userIsConnected' => $connectedUser !== null,
+                'reportAttempts' => $reportAttempts,
+            ]);
+        }
+
+        // Gestion des requêtes POST
+        if (!$connectedUser) {
+            return $this->json([
+                'error' => 'Vous devez être connecté.',
+                'redirectUrl' => $this->generateUrl('app_login'),
+            ], 403);
+        }
+
+        // Vérification des essais restants
+        $roles = $connectedUser->getRoles();
+        $isAdmin = in_array('ROLE_ADMIN', $roles, true);
+        $userReportAttempts = $connectedUser->getReportAttempts();
+
+        if (!$isAdmin && $userReportAttempts <= 0) {
+            return $this->json([
+                'error' => 'Essais épuisés',
+                'redirectUrl' => $this->generateUrl('app_pricing'),
+            ], 403);
+        }
+
+        // Validation des données reçues
+        $data = json_decode($request->getContent(), true);
+        if (!isset($data['headers'], $data['rows'], $data['objective'])) {
+            return $this->json(['error' => 'Données invalides.'], 400);
+        }
+
+        try {
+            $report = $openAiService->generateReport($data['headers'], $data['rows'], $data['objective']);
+        } catch (\Exception $e) {
+            return $this->json(['error' => 'Erreur lors de la génération du rapport.'], 500);
+        }
+
+        return $this->json([
+            'report' => $report,
+            'message' => 'Rapport généré avec succès.',
         ]);
     }
 
@@ -45,18 +122,87 @@ class MainController extends AbstractController
     }
 
     #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
+    public function contact(
+        Request $request, 
+        MailerInterface $mailer,
+        EntityManagerInterface $entityManager): Response
     {
+        $contactForm = $this->createForm(ContactFormType::class);
+
+        $contactForm->handleRequest($request);
+
+        if ($contactForm->isSubmitted() && $contactForm->isValid()){
+            $contactFormEmail = $contactForm->get('email')->getData();
+            $contactFormName = $contactForm->get('name')->getData();
+            $contactFormSubject = $contactForm->get('subject')->getData();
+            $contactFormMessage = $contactForm->get('message')->getData();
+
+            $contactFormInfo = new Contact();
+            $contactFormInfo->setName($contactFormName);
+            $contactFormInfo->setEmail($contactFormEmail);
+            $contactFormInfo->setSubject($contactFormSubject);
+            $contactFormInfo->setMessage($contactFormMessage);
+
+            $entityManager->persist($contactFormInfo);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Votre email a bien été envoyé ✅!');
+
+            $data = $contactForm->getData();
+            // dd($data);
+
+            $defaultEmail = 'contact@datagraph.fr'; // Adresse de l'expéditeur par défaut
+            $senderName = $data->getName();        // Utilisez les getters
+            $senderEmail = $data->getEmail();      // Utilisez les getters
+            // $senderName = $data['name'];
+            // $senderEmail = $data['email'];
+            $emailMessage = 'Email envoyé par : ' . $senderName . "\n\nAdresse email : " .$senderEmail. "\n\n" . $data->getMessage();
+
+            // Version original avec la récupération de l'email de la personne remplissant le formulaire de contact
+            // $mailAdress = $data['email'];
+            // $emailMessage = $data['message'];
+
+            $email = (new Email())
+                // ->from($mailAdress)
+                ->from($defaultEmail)
+                ->to('contact@datagraph.fr')
+                ->subject('Email reçu depuis la page contact de Datagraph')
+                ->text($emailMessage);
+
+                $mailer->send($email);
+
+                // Utilisez Flashy pour afficher un message flash de succès
+                $this->addFlash('success', 'Votre email a bien été envoyé ✅!');
+
+                // Redirigez l'utilisateur vers la même page (rafraîchissement)
+                return $this->redirectToRoute('app_main');
+        }elseif ($contactForm->isSubmitted() && !$contactForm->isValid()) {
+            $this->addFlash('error', 'Une erreur est survenue lors de l\'envoie du mail. Veuillez réessayer.');
+
+        }
+
         return $this->render('contact/index.html.twig', [
-            'controller_name' => 'MainController',
+            'controller_name' => 'HomeController',
+            'contactForm' => $contactForm->createView()
         ]);
     }
 
     #[Route('/tarifs', name: 'app_pricing')]
-    public function pricing(): Response
+    public function pricing(PlanRepository $planRepository): Response
     {
+        $businessAnnualyPlan = $planRepository->findBusinessAnnualyPlan();
+        $businessMonthlyPlan = $planRepository->findBusinessMonthlyPlan();
+        $basicPlan = $planRepository->findBasicPlan();
+    
+        if (!$businessMonthlyPlan || !$basicPlan || !$businessAnnualyPlan) {
+            throw $this->createNotFoundException('Les plans requis ne sont pas disponibles.');
+        }
+    
         return $this->render('pricing/index.html.twig', [
             'controller_name' => 'MainController',
+            'businessAnnualyPlan' => $businessAnnualyPlan,
+            'businessMonthlyPlan' => $businessMonthlyPlan,
+            'basicPlan' => $basicPlan,
         ]);
     }
 

@@ -1,3 +1,6 @@
+/* CLASSIQUE */
+
+/* CLASSIQUE */
 /* CHART OPTIONS */
 .containerChartOptions, .containerButtons{
     display: flex;
@@ -124,6 +127,23 @@
     align-items: center;
 }
 /* DEMO VIDEO*/
+
+/* CONTACT FORM */
+.contact_form{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.classicFormContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex-space-between{
+    display: flex;
+    justify-content: space-between;
+}
+/* CONTACT FORM */
 @media (min-width: 768px){
     .containerChartOptions{
         flex-direction:initial;

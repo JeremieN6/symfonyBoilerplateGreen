@@ -43,7 +43,11 @@ function handleFile(event) {
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            const csvData = e.target.result;
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[firstSheetName];
+            const csvData = XLSX.utils.sheet_to_csv(worksheet);
             try {
                 parsedData = parseCSV(csvData); // Stocke les données dans parsedData
                 if (parsedData.headers.length > 0) {
@@ -56,7 +60,7 @@ function handleFile(event) {
                 alert("Erreur lors du traitement du fichier CSV : " + error.message);
             }
         };
-        reader.readAsText(file);
+        reader.readAsArrayBuffer(file);
     }
 }
 
@@ -64,7 +68,7 @@ function handleFile(event) {
 function parseCSV(data) {
     // Détection du séparateur (virgule ou point-virgule)
     const separator = data.includes(";") ? ";" : ",";
-    
+
     // Découpage des lignes et colonnes en fonction du séparateur détecté
     const rows = data.trim().split("\n").map(row => row.split(separator));
     const headers = rows[0].map(header => header.trim());
@@ -197,68 +201,124 @@ function exportToPDF() {
     pdf.save("graphique.pdf");
 }
 
-// Vérifiez si vous êtes sur la page /application avant d'exécuter le code
 if (window.location.pathname === "/application") {
-    const generateAIReportButton = document.getElementById('generateAIReport');
+    document.getElementById('generateAIReport').addEventListener('click', async () => {
+        const objective = document.getElementById('analysisObjective').value;
 
-    if (generateAIReportButton) {
-        generateAIReportButton.addEventListener('click', async () => {
-            const objective = document.getElementById('analysisObjective').value;
+        // Vérifie si les données sont valides
+        if (!parsedData || !parsedData.headers || !parsedData.dataRows) {
+            alert("Veuillez importer un fichier CSV ou XLSX valide.");
+            return;
+        }
 
-            if (!parsedData || !parsedData.headers || !parsedData.dataRows) {
-                alert("Veuillez importer un fichier CSV ou XLSX valide.");
-                return;
-            }
+        // Vérifie si l'objectif est défini
+        if (!objective) {
+            alert("Veuillez entrer un objectif d'analyse.");
+            return;
+        }
 
-            try {
-                const dataSummary = {
-                    headers: parsedData.headers,
-                    dataRows: parsedData.dataRows,
+        // Prépare les données à envoyer à l'API
+        const dataSummary = {
+            headers: parsedData.headers,
+            dataRows: parsedData.dataRows,
+        };
+
+        // Prépare la requête à envoyer à l'API
+        const requestPayload = {
+            dataSummary,
+            objective,
+        };
+
+        try {
+            if (userIsConnected === false) {
+                // Si l'utilisateur n'est pas connecté
+                mockResponse = {
+                    status: 403,
+                    json: async () => ({
+                        error: 'Vous devez être connecté.',
+                        redirectUrl: '/connexion',
+                    }),
                 };
-
-                const response = await fetch("/api/generate-report", {
+            } else if (reportAttempts < 1) {
+                // Si l'utilisateur est connecté mais n'a plus d'essais
+                mockResponse = {
+                    status: 403,
+                    json: async () => ({
+                        error: 'Vous avez utilisé tous vos essais. Veuillez souscrire à un plan.',
+                        redirectUrl: '/tarifs',
+                    }),
+                };
+            } else {
+                // Si l'utilisateur est connecté et a encore des essais, faire la requête réelle
+                mockResponse = await fetch("/api/generate-report", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({ dataSummary, objective }),
+                    body: JSON.stringify(requestPayload),
                 });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    let report = result.report;
-
-                    // Identifier le titre principal (assume que c'est la première ligne)
-                    const title = "Rapport d'Analyse des Données";
-                    if (report.startsWith(title)) {
-                        report = report.replace(title, `<h1 class="report-title">${title}</h1>`);
-                    }
-
-                    // Ajouter des balises pour les sous-titres et autres modifications de format
-                    const formattedReport = report
-                        .replace(/\n/g, '<br>') // Remplacer les sauts de ligne par <br>
-                        .replace(/\*\*(.+?)\*\*/g, '<h2>$1</h2>') // Remplacer **texte** par <h2>texte</h2>
-                        .replace(/(ventes les plus élevées|profit le plus élevé|les ventes les plus faibles|tendances générales|recommandations)/gi, '<strong>$1</strong>') // Mettre en gras certains mots
-                        .replace(/Résumé:/g, '<h3>Résumé</h3>') // Remplacer "Résumé:" par <h3>Résumé</h3>
-                        .replace(/Tendances générales:/g, '<h3>Tendances Générales</h3>') // Remplacer "Tendances générales:" par <h3>Tendances Générales</h3>
-                        .replace(/Recommandations:/g, '<h3>Recommandations</h3>') // Remplacer "Recommandations:" par <h3>Recommandations</h3>
-                        .replace(/- (.+?)(?=\n|$)/g, '<li>$1</li>') // Convertir chaque "- texte" en <li>texte</li>
-                        .replace(/(<li>.*<\/li>)/g, '<ul>$&</ul>'); // Envelopper la liste dans <ul> uniquement s'il y a des <li>
-
-                    // Insérer le rapport formaté dans l'élément HTML
-                    document.getElementById('reportOutput').innerHTML = formattedReport;
-                } else {
-                    document.getElementById('reportOutput').innerText = `Erreur: ${result.error}`;
-                }
-            } catch (error) {
-                console.error("Erreur lors de la génération du rapport:", error);
-                alert("Une erreur est survenue lors de la génération du rapport.");
             }
-        });
-    } else {
-        console.warn('Le bouton "generateAIReport" est introuvable sur la page /application.');
-    }
+
+            const response = mockResponse;
+
+            if (!response.ok) {
+                // Si la réponse de l'API n'est pas ok (code HTTP 4xx ou 5xx)
+                const result = await response.json();
+                if (response.status === 403) {
+                    // Gestion des erreurs spécifiques, comme utilisateur non connecté ou essais épuisés
+                    flasher.warning(result.error || "Une erreur est survenue.", { timeout: 5000 });
+                    // Optionnel : rediriger l'utilisateur après un délai
+                    if (result.redirectUrl) {
+                        setTimeout(() => {
+                            window.location.href = result.redirectUrl;
+                        }, 5000);
+                    }
+                } else {
+                    throw new Error(`Erreur HTTP : ${response.status}`);
+                }
+                return;
+            }
+
+            // Lire la réponse JSON de l'API
+            const result = await response.json();
+            console.log(result); // Vérifie la structure de la réponse de l'API
+
+            // Si la génération du rapport a réussi
+            if (result && result.message) {
+                flasher.success(result.message, { timeout: 5000 });
+                // Décrémenter le nombre d'essais restants
+                reportAttempts -= 1;
+                document.querySelector('p').innerText = `Nombre d'essais restants : ${reportAttempts}`;
+            } else {
+                flasher.success("Rapport généré avec succès.", { timeout: 5000 });
+            }
+
+            // Formater le rapport reçu
+            let report = result.report;
+            const title = "Rapport d'Analyse";
+            if (report.startsWith(title)) {
+                report = report.replace(title, `<h1 class="report-title">${title}</h1>`);
+            }
+
+            // Ajouter des balises pour les sous-titres et autres modifications de format
+            const formattedReport = report
+                .replace(/\n/g, '<br>') // Remplacer les sauts de ligne par <br>
+                .replace(/\*\*(.+?)\*\*/g, '<h2>$1</h2>') // Remplacer **texte** par <h2>texte</h2>
+                .replace(/(ventes les plus élevées|profit le plus élevé|les ventes les plus faibles|tendances générales|recommandations)/gi, '<strong>$1</strong>') // Mettre en gras certains mots
+                .replace(/Résumé:/g, '<h3>Résumé</h3>') // Remplacer "Résumé:" par <h3>Résumé</h3>
+                .replace(/Tendances générales:/g, '<h3>Tendances Générales</h3>') // Remplacer "Tendances générales:" par <h3>Tendances Générales</h3>
+                .replace(/Recommandations:/g, '<h3>Recommandations</h3>') // Remplacer "Recommandations:" par <h3>Recommandations</h3>
+                .replace(/- (.+?)(?=\n|$)/g, '<li>$1</li>') // Convertir chaque "- texte" en <li>texte</li>
+                .replace(/(<li>.*<\/li>)/g, '<ul>$&</ul>'); // Envelopper la liste dans <ul> uniquement s'il y a des <li>
+
+            // Insérer le rapport formaté dans l'élément HTML
+            document.getElementById('reportOutput').innerHTML = formattedReport;
+        } catch (error) {
+            // Gestion des erreurs de réseau ou autres erreurs d'exécution
+            console.error("Erreur lors de l'envoi de la requête à l'API :", error);
+            flasher.warning("Une erreur est survenue lors de la génération du rapport.", { timeout: 5000 });
+        }
+    });
 } else {
     console.info('Information : Le script de génération de rapport ne s’exécute pas car vous n’êtes pas sur la page de gestion de l\'application.');
 }
