@@ -22,11 +22,22 @@ class MainController extends AbstractController
 {
     #[Route('/', name: 'app_main')]
     public function index(
+        PlanRepository $planRepository
     ): Response
     {
+        $businessAnnualyPlan = $planRepository->findBusinessAnnualyPlan();
+        $businessMonthlyPlan = $planRepository->findBusinessMonthlyPlan();
+        $basicPlan = $planRepository->findBasicPlan();
+    
+        if (!$businessMonthlyPlan || !$basicPlan || !$businessAnnualyPlan) {
+            throw $this->createNotFoundException('Les plans requis ne sont pas disponibles.');
+        }
 
         return $this->render('main/main.html.twig', [
             'controller_name' => 'MainController',
+            'businessAnnualyPlan' => $businessAnnualyPlan,
+            'businessMonthlyPlan' => $businessMonthlyPlan,
+            'basicPlan' => $basicPlan
         ]);
     }
 
