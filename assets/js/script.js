@@ -236,7 +236,7 @@ if (window.location.pathname === "/application") {
                     status: 403,
                     json: async () => ({
                         error: 'Vous devez être connecté.',
-                        redirectUrl: '/login',
+                        redirectUrl: '/connexion',
                     }),
                 };
             } else if (reportAttempts < 1) {
