@@ -2,8 +2,8 @@
 
 {% block title %}Inscription
 {% endblock %}
-
 {% block body %}
+{% include '/_partials/_flash.html.twig' %}
   <!-- ====== Forms Section Start -->
 
   <!-- ====== Forms Section End -->
@@ -91,7 +91,7 @@
 													<a href="{{ path('app_terms') }}" class="uc-link text-primary">conditions d'utilisation</a>.
 												</label>
 											</div>
-											<button class="btn btn-primary btn-md text-white" type="submit">S'inscrire</button>
+											<button class="btn btn-primary btn-md text-white w-100 my-5" type="">S'inscrire</button>
 											{{ form_end(registrationForm) }}
 
 										<p>Vous avez déjà un compte ?

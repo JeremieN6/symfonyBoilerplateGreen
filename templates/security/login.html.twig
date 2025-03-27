@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+{% include '/_partials/_flash.html.twig' %}
 	<form method="post">
 		{% if error %}
 			<div class="fixed top-4 right-4 w-auto bg-yellow-400 text-sm text-white rounded-xl shadow-lg mb-4 z-50">

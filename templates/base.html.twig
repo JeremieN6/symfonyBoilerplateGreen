@@ -74,6 +74,9 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 			<!-- XLSX.js -->
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.1/xlsx.full.min.js"></script>
+
+			<!-- Notification Flash -->
+			<script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
 		{% endblock %}
 
 
@@ -109,7 +112,7 @@
 					</div>
 				</div>
 			</div>
-
+			{{ flasher_render() }}
 			<!-- End Toast -->
 		{% endif %}
 
@@ -168,8 +171,16 @@
 			<!-- include scripts -->
 			<script src="{{ asset('assets/js/uni-core-bundle.min.js')}}"></script>
 			<!-- include app script -->
+<<<<<<< HEAD
 			<script defer="" src="{{ asset('assets/js/app.js')}}"></script>
 			<script defer="" src="{{ asset('assets/js/script.js')}}"></script>
+=======
+			<script defer="" src="{{ asset('js/app.js')}}"></script>
+			<script defer="" src="{{ asset('js/script.js')}}"></script>
+			<script defer="" src="{{ asset('js/customModal.js')}}"></script>
+			<!-- Notification Flash -->
+			<script defer src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
+>>>>>>> 40255b9fe3f74c7d34ecbb0feb36a7c53cf76f61
 			<script>
 
 

@@ -16,6 +16,33 @@ class PlanRepository extends ServiceEntityRepository
         parent::__construct($registry, Plan::class);
     }
 
+    public function findBusinessAnnualyPlan(): ?Plan
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.name = :name')
+            ->setParameter('name', 'Business Année')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findBusinessMonthlyPlan(): ?Plan
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.name = :name')
+            ->setParameter('name', 'Business Mois')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findBasicPlan(): ?Plan
+    {
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.name = :name')
+            ->setParameter('name', 'Basic')
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
     //    /**
     //     * @return Plan[] Returns an array of Plan objects
     //     */

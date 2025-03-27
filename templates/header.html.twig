@@ -21,6 +21,9 @@
                             <li><a href="{{path('app_pricing')}}">Tarifs</a></li>
                             <li><a href="{{path('app_about')}}">A propos</a></li>
                             <li><a href="{{path('app_contact')}}">Contact</a></li>
+                            {% if app.user and is_granted('ROLE_ADMIN') %}
+                                <li><a href="{{ path('admin') }}">Admin</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                     <div class="uc-navbar-right">
