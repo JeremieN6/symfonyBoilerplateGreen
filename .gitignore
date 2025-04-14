@@ -22,7 +22,9 @@
 ###< symfony/phpunit-bridge ###
 
 ###> symfony/asset-mapper ###
-/public/assets/
+/public/assets/*
+!/public/assets/styles/custom.css
+!/public/assets/styles/style.css
 /assets/vendor/
 ###< symfony/asset-mapper ###
 

@@ -43,11 +43,14 @@
                                         Les valeurs sont simples !</h2>
                                     <div class="d-flex flex-column">
                                         <div class="chart-options">
-                                            <div class="d-flex justify-center file-upload">
-                                                <label for="file-input">Importez votre fichier CSV ou XLSX :</label>
-                                                <input type="file" id="file-input" accept=".csv, .xlsx">
+                                            <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-3">
+                                                <div class="w-100 w-md-auto text-center">
+                                                    <label for="file-input" class="mb-0">Importez votre fichier CSV ou XLSX :</label>
+                                                </div>
+                                                <div class="w-100 w-md-auto">
+                                                    <input type="file" id="file-input" accept=".csv, .xlsx" class="form-control">
+                                                </div>
                                             </div>
-
                                             <div class="containerChartOptions containerGraphType">
                                                 <div class="contentGraphType">
                                                     <label for="chart-type">Type de graphique :</label>
@@ -59,8 +62,7 @@
                                                     </select>
                                                 </div>
                                                 <div class="contentGraphColor">
-                                                    <label for="chart-color" class="chartColorLabel">Couleur principale
-                                                        :</label>
+                                                    <label for="chart-color" class="chartColorLabel">Couleur principale :</label>
                                                     <input type="color" id="chart-color" value="#12715B"
                                                         class="colorPicker" />
                                                 </div>
@@ -134,7 +136,13 @@
                                                  </a>
                                                 {% endif %}
                                             {% else %}
-                                                    <button class="btn btn-md h-48px xl:h-56px w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">Veuillez vous <a href="{{ path('app_login') }}">connecter</a> pour générer un rapport.</button>
+                                                     <div class="w-100 text-center">
+                                                        <button class="btn btn-md h-auto py-3 w-100 lg:min-w-150px xl:min-w-200px btn-primary text-white">
+                                                            <span class="d-inline-block lh-lg">
+                                                                Veuillez vous <a href="{{ path('app_login') }}" class="text-white text-decoration-underline">connecter</a> pour générer un rapport.
+                                                            </span>
+                                                        </button>
+                                                    </div>
                                             {% endif %}
                                         <div id="reportOutput"></div>
                                         </div>
